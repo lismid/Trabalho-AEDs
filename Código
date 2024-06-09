@@ -1,0 +1,46 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct {
+    int dia;
+    int mes;
+    long int ano;
+} DATA;
+
+typedef struct {
+    int horas;
+    int minutos;
+} HORARIO;
+
+typedef struct {
+    char logradouro[100];
+    int numero;
+    char bairro[50];
+    char complemento[50];
+    long int CEP;
+    char cidade[50];
+    char estado[3];
+} ENDERECO;
+
+typedef struct {
+    long int codigoPACIENTE;
+    char nome[100];
+    ENDERECO endereco;
+    long int telefone;
+    DATA dataNASCIMENTO;
+} PACIENTE;
+
+typedef struct {
+    long int codigoMEDICO;
+    char nome[100];
+    long int telefone;
+    char especialidade[50];
+} MEDICO;
+
+typedef struct {
+    long int codigoCONSULTA;
+    DATA dataCONSULTA;
+    HORARIO hora;
+    long int codigoMEDICO;
+    long int codigoPACIENTE;
+} CONSULTA;
