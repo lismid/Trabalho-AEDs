@@ -1,6 +1,6 @@
-#Mapa das Funções
+# Mapa das Funções
 
-[Função Principal]()  
+[Função Principal](https://github.com/lismid/Trabalho-AEDs/blob/main/Codigo/CodigoPrincipal)  
 
 1- Implemente uma função para [cadastrar um paciente](https://github.com/lismid/Trabalho-AEDs/blob/main/Codigo/Funcao_CadastrarPaciente). Essa função deve garantir que não haverá mais de um paciente com o mesmo código. Se quiser pode gerar o código do paciente automaticamente.  
 
