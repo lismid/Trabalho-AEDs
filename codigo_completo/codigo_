@@ -60,7 +60,7 @@ void cadastrarPaciente() {
     PACIENTE paciente;
     paciente.codigoPACIENTE = gerarCodigoPaciente();
 
-    printf("Complete as seguintes informacoes pessoais para prosseguir:");
+    printf("Complete as seguintes informacoes pessoais para prosseguir:\n");
     printf("Nome completo: ");
     fgets(paciente.nome, sizeof(paciente.nome), stdin);
     
@@ -94,7 +94,7 @@ void cadastrarPaciente() {
     scanf("%d", & paciente.dataNASCIMENTO.mes);
     getchar();
     printf("Ano: ");
-    scanf("%d", & paciente.dataNASCIMENTO.ano);
+    scanf("%ld", & paciente.dataNASCIMENTO.ano);
     getchar();
 
     printf("Seu codigo de paciente e: %ld\n", paciente.codigoPACIENTE);
@@ -114,7 +114,7 @@ int cadastrarMedico(){
 
 long int codigoM = gerarCodigoMedico();
 
-    printf("Complete as seguintes informacoes pessoais para prosseguir:");
+    printf("Complete as seguintes informacoes pessoais para prosseguir:\n");
     printf("Nome: \n");
     fgets(medico.nome, 100, stdin);
     getchar();
@@ -143,7 +143,7 @@ void cadastrarConsulta(){
     
     consulta.codigoCONSULTA = gerarCodigoConsulta();
     
-    printf("Para cadastrar a consulta, preencha as informacoes abaixo: ");
+    printf("Para cadastrar a consulta, preencha as informacoes abaixo:\n");
     printf("Código do médico: ");
     scanf("%li", & consulta.codigoMEDICO);
     printf("Código do paciente: ");
