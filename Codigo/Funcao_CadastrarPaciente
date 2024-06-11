@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-
 typedef struct {
     int dia;
     int mes;
@@ -46,7 +43,7 @@ typedef struct {
 } CONSULTA;
 
 long int gerarCodigoPaciente() {
-    static long int codigo = 1000;
+    static long int codigo = 100;
     return codigo++;
 }
 
@@ -91,15 +88,4 @@ void cadastrarPaciente() {
     getchar();
 
     printf("Seu codigo de paciente e: %ld\n", paciente.codigoPACIENTE);
-}
-
-int main ()
-{
-    cadastrarPaciente();
-    
-    printf("\n");
-    
-    cadastrarPaciente();
-    
-    return 0;
 }
