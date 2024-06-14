@@ -129,7 +129,10 @@ long int codigoM = gerarCodigoMedico();
 
     printf("Seu codigo de medico e: %ld\n", codigoM);
 
+    return 0;
+
 }
+
 //Função de cadastro da consulta:
 /////////////////////////////////
 
@@ -144,9 +147,9 @@ void cadastrarConsulta(){
     consulta.codigoCONSULTA = gerarCodigoConsulta();
     
     printf("Para cadastrar a consulta, preencha as informacoes abaixo:\n");
-    printf("Código do médico: ");
+    printf("Codigo do medico: ");
     scanf("%li", & consulta.codigoMEDICO);
-    printf("Código do paciente: ");
+    printf("Codigo do paciente: ");
     scanf("%li", & consulta.codigoPACIENTE);
     
     printf("Hora da consulta: ");
@@ -161,7 +164,7 @@ void cadastrarConsulta(){
     printf("Ano da consulta: ");
     scanf("%li", & consulta.dataCONSULTA.ano);
     
-    printf("Código da consulta: %li\n", consulta.codigoCONSULTA);
+    printf("\nCodigo da consulta: %li\n", consulta.codigoCONSULTA);
 }
 
 //Função main:
