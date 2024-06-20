@@ -1,7 +1,5 @@
 #include <string>
 #include <iostream>
-#include "Struct.hpp"
-
 
 
 using namespace std;

@@ -9,6 +9,7 @@ class DATA {
     int horas;
     int minutos;
     public:
+    DATA(int d,int m ,int a ,int h ,int mn ) :dia(d) ,mes(m) ,ano(a),horas(h),minutos(mn){}
     void Inserirdata();
     void Modificardata();
 } ;
