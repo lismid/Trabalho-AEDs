@@ -1,3 +1,5 @@
+#include "Struct.hpp"
+
 long int gerarCodigoMedico() {
     static long int codigo = 1000;
     return codigo++;

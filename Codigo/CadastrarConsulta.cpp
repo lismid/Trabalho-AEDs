@@ -1,3 +1,6 @@
+#include "Struct.hpp"
+
+
 void cadastrarConsulta(){
     CONSULTA consulta;
     
