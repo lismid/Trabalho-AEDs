@@ -13,10 +13,10 @@ class CONSULTA{
     public:
     CONSULTA();
     ~CONSULTA();
-    float agendaconsulta();
+    float setagendaconsulta();
     int getcodigomedico() const;
     int getcodigopaciente()const;
-    float cancelarconsulta();
+    float setcancelarconsulta();
 
 
 } ;
