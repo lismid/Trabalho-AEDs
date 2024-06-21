@@ -11,6 +11,8 @@ class CONSULTA{
     MEDICO codigodomedico;
     PACIENTE codigoPACIENTE;
     public:
+    CONSULTA();
+    ~CONSULTA();
     float agendaconsulta();
     int getcodigomedico() const;
     int getcodigopaciente()const;

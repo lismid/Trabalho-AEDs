@@ -1,3 +1,4 @@
+
 #include <string>
 #include <iostream>
 
@@ -9,13 +10,17 @@ void menuprincipal(){
     bool continuar = true;
 
     while (continuar) {
-        cout << "\nMenu Principal:" << endl;
-        cout << "1. Opção 1" << endl;
-        cout << "2. Opção 2" << endl;
-        cout << "3. Opção 3" << endl;
-        cout << "0. Sair" << endl;
-        cout << "Escolha uma opção: ";
+        cout << "<------------------------------->" << endl;
+        cout << "\tMenu Principal" << endl;
+        cout << "<------------------------------->" << endl;
+        cout << "\t1. Consultas" << endl;
+        cout << "\t2. Area de Cadastros" << endl;
+        cout << "\t3. Quadro de Horarios" << endl;
+        cout << "\t0. Sair" << endl;
+        cout << "\tEscolha uma opção:\n ";
         cin >> escolha;
+        
+
 
         switch (escolha) {
             case 1:
