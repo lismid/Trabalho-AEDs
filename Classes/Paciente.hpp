@@ -21,7 +21,7 @@ private:
     long int codigoPACIENTE;
 
 public:
-    PACIENTE();
+    ~PACIENTE()= default;
     PACIENTE(const string &n, long int tel, const DATA &dataNasc, const string &log, int num, const string &bai, const string &comp, long int cep, const string &cid, const string &est, long int codPaciente);
 
     string getNome() const;

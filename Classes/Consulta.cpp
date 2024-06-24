@@ -1,6 +1,7 @@
 #include "Consulta.hpp"
 #include <iostream>
 #include <algorithm>
+using namespace std;
 
 CONSULTA::CONSULTA() : codigoConsulta(0), medico(nullptr), paciente(nullptr) {}
 
@@ -10,7 +11,7 @@ void CONSULTA::agendarConsulta(int codigoPaciente, int codigoMedico, const DATA&
     // Implementar lógica para buscar e associar médico e paciente usando seus códigos
     dataConsulta = data;
     gerarCodigoConsulta();
-    std::cout << "Consulta agendada com sucesso!" << std::endl;
+    cout << "Consulta agendada com sucesso!" << endl;
 }
 
 int CONSULTA::getCodigoMedico() const {
@@ -25,18 +26,18 @@ void CONSULTA::cancelarConsulta() {
     codigoConsulta = 0;
     medico = nullptr;
     paciente = nullptr;
-    std::cout << "Consulta cancelada!" << std::endl;
+    cout << "Consulta cancelada!" << endl;
 }
 
-void Consulta::gerarCodigoConsulta(){
+void CONSULTA::gerarCodigoConsulta(){
     static int contador = 1;
     codigoConsulta = contador++;
 }
 
-bool Consulta::podeAtenderMaisUmaConsulta(const std::vector<CONSULTA>& consultas, int codigoMedico, const Data& data) {
-    int consultasNoDia = std::count_if(consultas.begin(), consultas.end(), [codigoMedico, &data](const Consulta& consulta) {
+bool CONSULTA::podeAtenderMaisUmaConsulta(const vector<CONSULTA>& consultas, int codigoMedico, const DATA& data) {
+    int consultasNoDia = count_if(consultas.begin(), consultas.end(), [codigoMedico, &data](const CONSULTA& consulta) {
         return consulta.getCodigoMedico() == codigoMedico && consulta.dataConsulta == data;
     });
-    return consultasNoDia < 10; // Exemplo: permitir até 10 consultas por dia
+    return consultasNoDia < 2; 
 }
 

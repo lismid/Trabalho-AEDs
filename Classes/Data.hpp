@@ -10,24 +10,19 @@ class DATA {
     int minutos;
     public:
     DATA(int d,int m ,int a ,int h ,int mn ) :dia(d) ,mes(m) ,ano(a),horas(h),minutos(mn){}
-    ~DATA();
-    void setInserirdia();
-    void setInserirhora();
-    void setInserirmes();
-    void setInserirano();
-    void setInserirminutos();
-    void setModificarrdia();
-    void setModificarrhora();
-    void setModificarrmes();
-    void setModificarrano();
-    void setModificarrminutos();
-    int getverdia();
-    int getverhora();
-    int getvermes();
-    int getverano();
-    int getverminutos();
+    ~DATA()= default;
+    void setInserirdia(int d);
+    void setInserirhora(int d);
+    void setInserirmes(int d);
+    void setInserirano(int d);
+    void setInserirminutos(int d);
+    void setModificarrdia(int d);
+    void setModificarrhora(int d);
+    void setModificarrmes(int d);
+    void setModificarrano(int d);
+    void setModificarrminutos(int d);
+    
     int getverdatas();
-
 } ;
 #endif 
 

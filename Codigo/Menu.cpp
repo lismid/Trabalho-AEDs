@@ -24,7 +24,7 @@ void meneu(){
         {
             
             case 1:
-               
+               menuConsulta();
                 break;
             case 2:
                cout << "1. Opção 2" << endl;

@@ -15,14 +15,14 @@ private:
 
 public:
     CONSULTA();
-    ~CONSULTA();
+    ~CONSULTA()= default;
 
     void agendarConsulta(int codigoPaciente, int codigoMedico, const DATA& data);
     int getCodigoMedico() const;
     int getCodigoPaciente() const;
     void cancelarConsulta();
     void gerarCodigoConsulta();
-    static bool podeAtenderMaisUmaConsulta(const std::vector<CONSULTA>& consultas, int codigoMedico, const Data& data);
+    static bool podeAtenderMaisUmaConsulta(const std::vector<CONSULTA>& consultas, int codigoMedico, const DATA& data);
 };
 
-#endif // CONSULTA_HPP
+#endif 
