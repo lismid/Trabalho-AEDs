@@ -1,45 +1,68 @@
-
-#include <string>
 #include <iostream>
-
+#include <string>
 
 using namespace std;
 
-void menuprincipal(){
+
+void meneu(){
     int escolha;
     bool continuar = true;
 
-    while (continuar) {
+    while (continuar)
+    {
         cout << "<------------------------------->" << endl;
         cout << "\tMenu Principal" << endl;
         cout << "<------------------------------->" << endl;
         cout << "\t1. Consultas" << endl;
-        cout << "\t2. Area de Cadastros" << endl;
-        cout << "\t3. Quadro de Horarios" << endl;
+        cout << "\t2. Área de Cadastros" << endl;
+        cout << "\t3. Quadro de Horários" << endl;
         cout << "\t0. Sair" << endl;
         cout << "\tEscolha uma opção:\n ";
         cin >> escolha;
-        
 
-
-        switch (escolha) {
+        switch (escolha)
+        {
+            
             case 1:
-                  cout << "1. Opção 1" << endl;
+               
                 break;
             case 2:
-                  cout << "1. Opção 2" << endl;
+               cout << "1. Opção 2" << endl;
                 break;
+
             case 3:
-                  cout << "1. Opção 3" << endl;
+                cout << "1. Opção 2" << endl;
                 break;
-            case 0:
-                continuar = false;
-                cout << "Saindo do programa." << endl;
-                break;
-            default:
-                cout << "Opção inválida, por favor tente novamente." << endl;
+
+                default:
+               cout << "Opção inválida, por favor tente novamente." << endl;
+            
+            break;
         }
     }
+}
+
+void menuConsulta(){
+    int escolha1;
+    bool marcado = true;
+
+    while (marcado)
+    { cout << "<------------------------------->" << endl;
+            cout << "\tMenu Consultas" << endl;
+            cout << "<------------------------------->" << endl;
+            cout << "1. Marca Consulta" << endl;
+            cout << "2. Cancelar Consulta" << endl;
+            cout << "3. Voltar no Menu Principal" << endl;
+            cin >> escolha1;
+        switch (escolha1)
+        {
+        case 1:
+            break;
+        
+        default:
+            break;
+        }
+    }
+    
 
 }
- 

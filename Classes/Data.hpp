@@ -26,6 +26,7 @@ class DATA {
     int getvermes();
     int getverano();
     int getverminutos();
+    int getverdatas();
 
 } ;
 #endif 

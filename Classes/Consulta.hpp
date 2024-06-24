@@ -1,26 +1,28 @@
-#ifndef Consulta_h
-#define Consulta_h
+#ifndef CONSULTA_HPP
+#define CONSULTA_HPP
+
 #include <vector>
 #include "Data.hpp"
 #include "Medico.hpp"
 #include "Paciente.hpp"
 
-class CONSULTA
-{
+class CONSULTA{
 private:
-    float codigoCONSULTA;
-    DATA dataCONSULTA;
-    MEDICO codigodomedico;
-    PACIENTE codigoPACIENTE;
+    int codigoConsulta;
+    DATA dataConsulta;
+    Medico* medico;
+    PACIENTE* paciente;
 
 public:
     CONSULTA();
     ~CONSULTA();
-    void setagendaconsulta(int codigoPaciente, int codigoMedico, const DATA& data);
-    int getcodigomedico() const;
-    int getcodigopaciente() const;
-    void setcancelarconsulta();
-    void setgeracodigoconsulta();
-    static bool podeAtenderMaisUmaConsulta(const std::vector<CONSULTA>& consultas, int codigoMedico, const DATA& data);
+
+    void agendarConsulta(int codigoPaciente, int codigoMedico, const DATA& data);
+    int getCodigoMedico() const;
+    int getCodigoPaciente() const;
+    void cancelarConsulta();
+    void gerarCodigoConsulta();
+    static bool podeAtenderMaisUmaConsulta(const std::vector<CONSULTA>& consultas, int codigoMedico, const Data& data);
 };
-#endif
+
+#endif // CONSULTA_HPP
