@@ -1,13 +1,15 @@
 #include "/home/julio/Documentos/Trabalho-AEDs/Classes/Paciente.hpp"
+#include "/home/julio/Documentos/Trabalho-AEDs/Classes/Data.hpp"
 #include <iostream>
+#include <string>
 #include <fstream>
 #include <sstream>
 
-void CadastroPessoas::cadastrarPaciente() {
+void PACIENTE::cadastrarPaciente() {
     string nome, logradouro, bairro, complemento, cidade, estado;
     long int telefone, cep, codigoPaciente;
     int numero;
-    DATA dataNasc;
+    DATA dataNasc(0,0,0,0,0);
 
     cout << "Informe o nome do paciente: ";
     cin >> nome;
