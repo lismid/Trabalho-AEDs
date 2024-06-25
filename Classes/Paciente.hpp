@@ -3,14 +3,14 @@
 
 #include "Data.hpp"
 #include <string>
+
 using namespace std;
 
-class PACIENTE
-{
+class PACIENTE {
 private:
     string nome;
     long int telefone;
-    DATA dataNASCIMENTO;
+    DATA dataNascimento; 
     string logradouro;
     int numero;
     string bairro;
@@ -18,12 +18,15 @@ private:
     long int CEP;
     string cidade;
     string estado;
-    long int codigoPACIENTE;
+    long int codigoPaciente;
 
 public:
-    ~PACIENTE()= default;
-    PACIENTE(const string &n, long int tel, const DATA &dataNasc, const string &log, int num, const string &bai, const string &comp, long int cep, const string &cid, const string &est, long int codPaciente);
+    // Construtor
+    PACIENTE(const string &n, long int tel, const DATA &dataNasc, const string &log, int num,
+            const string &bai, const string &comp, long int cep, const string &cid,
+            const string &est, long int codPaciente);
 
+    // Getters
     string getNome() const;
     long int getTelefone() const;
     DATA getDataNascimento() const;
@@ -35,6 +38,8 @@ public:
     string getCidade() const;
     string getEstado() const;
     long int getCodigoPaciente() const;
+
+    // Setters
     void setNome(const string &n);
     void setTelefone(long int tel);
     void setDataNascimento(const DATA &dataNasc);
@@ -46,8 +51,14 @@ public:
     void setCidade(const string &cid);
     void setEstado(const string &est);
     void setCodigoPaciente(long int codPaciente);
+
+    // Métodos para manipulação de pacientes
     void cadastrarPaciente();
     void descadastrarPaciente();
+    void adicionarPaciente(const string &nome, long int telefone, const DATA &dataNasc,
+                           const string &logradouro, int numero, const string &bairro,
+                           const string &complemento, long int cep, const string &cidade,
+                           const string &estado, long int codigoPaciente);
 };
 
-#endif
+#endif // PACIENTE_H

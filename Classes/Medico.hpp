@@ -6,22 +6,24 @@
 
 using namespace std;
 
-class Medico {
+class Medico
+{
 private:
     int codigo;
     string nome;
-    string telefone;
     string especialidade;
 
 public:
-    Medico(int codigo, const string& nome, const string& telefone, const string& especialidade);
+    Medico();
+    Medico(int codigo = -1, const std::string &nome = "", const std::string &especialidade = "")
+        : codigo(codigo), nome(nome), especialidade(especialidade) {}
 
     void cadastrar();
 
     int getCodigo() const;
-    const string& getNome() const;
-    const string& getTelefone() const;
-    const string& getEspecialidade() const;
+    const string &getNome() const;
+    const string &getTelefone() const;
+    const string &getEspecialidade() const;
 };
 
 vector<Medico> lerMedicos();

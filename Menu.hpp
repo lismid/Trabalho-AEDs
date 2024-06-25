@@ -4,9 +4,9 @@
 
 using namespace std;
 
-void menuConsulta() ;
-void menuCadastro() ;
-void menuHorarios() ;
+void menuConsulta();
+void menuCadastro();
+void menuHorarios();
 
 void menu()
 {
