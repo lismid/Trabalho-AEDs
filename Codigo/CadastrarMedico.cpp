@@ -1,18 +1,21 @@
-#include "Medico.hpp"
+
+#include "/home/julio/Documentos/Trabalho-AEDs/Classes/Medico.hpp"
 #include <iostream>
 #include <fstream>
 #include <vector>
 
-std::vector<Medico> lerMedicos() {
-    std::vector<Medico> medicos;
-    std::ifstream arquivo("medicos.txt");
+using namespace std; 
+
+vector<Medico> lerMedicos() {
+    vector<Medico> medicos;
+    ifstream arquivo("medicos.txt");
     if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir o arquivo de médicos." << std::endl;
+        cerr << "Erro ao abrir o arquivo de médicos." << endl;
         return medicos;
     }
 
     int codigo;
-    std::string nome, especialidade;
+    string nome, especialidade;
     while (arquivo >> codigo >> nome >> especialidade) {
         medicos.emplace_back(codigo, nome, especialidade);
     }
@@ -20,35 +23,40 @@ std::vector<Medico> lerMedicos() {
     arquivo.close();
     return medicos;
 }
+void Medico::setEspecialidade(const std::string& especialidade) {
+    this->especialidade = especialidade;
+}
 
-void salvarMedicos(const std::vector<Medico>& medicos) {
-    std::ofstream arquivo("medicos.txt");
+void salvarMedicos(const vector<Medico>& medicos) {
+    ofstream arquivo("medicos.txt");
     if (!arquivo.is_open()) {
-        std::cerr << "Erro ao abrir o arquivo de médicos para escrita." << std::endl;
+        cerr << "Erro ao abrir o arquivo de médicos para escrita." << endl;
         return;
     }
 
     for (const auto& medico : medicos) {
         arquivo << medico.getCodigo() << " "
                 << medico.getNome() << " "
-                << medico.getEspecialidade() << std::endl;
+                << medico.getEspecialidade() << endl;
     }
 
     arquivo.close();
 }
-
+void Medico::setNome(const std::string& nome) {
+    this->nome = nome;
+}
 
 void cadastrarMedico() {
-    std::string nome, especialidade;
+    string nome, especialidade;
 
     // Verificar a lista de médicos existentes para determinar o próximo código
-    std::vector<Medico> medicos = lerMedicos();
+    vector<Medico> medicos = lerMedicos();
     int proximoCodigo = medicos.empty() ? 1 : medicos.back().getCodigo() + 1;
 
-    std::cout << "Informe o nome do médico: ";
-    std::cin >> nome;
-    std::cout << "Informe a especialidade do médico: ";
-    std::cin >> especialidade;
+    cout << "Informe o nome do médico: ";
+    cin >> nome;
+    cout << "Informe a especialidade do médico: ";
+    cin >> especialidade;
     
 
     // Criar um novo objeto de Medico
@@ -61,5 +69,5 @@ void cadastrarMedico() {
     // Salvar os médicos de volta no arquivo
     salvarMedicos(medicos);
 
-    std::cout << "Médico cadastrado com sucesso!" << std::endl;
+    cout << "Médico cadastrado com sucesso!" << endl;
 }

@@ -1,29 +1,28 @@
+#ifndef RELATORIO_HPP
+#define RELATORIO_HPP
+
 #include "Consulta.hpp"
 #include "Medico.hpp"
-#include <iostream>
+#include "Paciente.hpp"
+#include "Data.hpp"
 #include <vector>
+#include <string>
+using namespace std;
 
-void relatorioConsultasDoMedico(const vector<CONSULTA>& consultas, const vector<Medico>& medicos, long int codigoMedico) {
-    const Medico* medico = nullptr;
 
-    for (const auto& med : medicos) {
-        if (med.getCodigo() == codigoMedico) {
-            medico = &med;
-            break;
-        }
-    }
+class Relatorio {
+public:
+    Relatorio();
+    ~Relatorio();
 
-    if (!medico) {
-        cout << "Erro: Médico não encontrado." << endl;
-        return;
-    }
+    void consultasPorData(const DATA& data) const;
+    void consultasPorPaciente(const string& nomeOuCodigoPaciente) const;
+    void consultasPorMedico(const string& nomeOuCodigoMedico) const;
 
-    cout << "Consultas do médico " << medico->getNome() << ":" << endl;
-    for (const auto& consulta : consultas) {
-        if (consulta.getCodigoMedico() == codigoMedico) {
-            cout << "Consulta código: " << consulta.getCodigoConsulta() 
-                 << ", Paciente código: " << consulta.getCodigoPaciente() 
-                 << ", Data: " << consulta.getDataConsulta().getverdata() << endl;
-        }
-    }
-}
+private:
+    vector<CONSULTA> lerConsultas() const;
+    vector<Medico> lerMedicos() const;
+    vector<PACIENTE> lerPacientes() const;
+};
+
+#endif // RELATORIO_HPP

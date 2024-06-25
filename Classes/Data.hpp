@@ -12,10 +12,9 @@ private:
     int minutos;
 
 public:
-    // Construtor padrão (sem parâmetros)
-    DATA() : dia(0), mes(0), ano(0), horas(0), minutos(0) {}
 
-    // Construtor com parâmetros
+    DATA() : dia(0), mes(0), ano(0), horas(0), minutos(0) {}
+    DATA(int dia, int mes, int ano);
     DATA(int d, int m, int a, int h, int mn) : dia(d), mes(m), ano(a), horas(h), minutos(mn) {}
 
     int getDia() const { return dia; }

@@ -3,7 +3,8 @@
 
 #include "Medico.hpp"
 #include "Paciente.hpp"
-#include "Data.hpp" // Assumindo que a classe DATA está definida aqui
+#include "Data.hpp"
+#include <vector>
 
 class CONSULTA {
 private:
@@ -14,14 +15,18 @@ private:
 
 public:
     CONSULTA();
+    CONSULTA(int codigoConsulta, const Medico& medico, const PACIENTE& paciente, const DATA& dataConsulta);
     ~CONSULTA();
 
     void agendarConsulta(int codigoPaciente, int codigoMedico, int dia, int mes, int ano, int horas, int minutos);
     int getCodigoMedico() const;
     int getCodigoPaciente() const;
+    int getCodigoConsulta() const;
+    DATA getDataConsulta() const;
     void cancelarConsulta();
     void gerarCodigoConsulta();
     static bool podeAtenderMaisUmaConsulta(const std::vector<CONSULTA>& consultas, int codigoMedico, const DATA& data);
+    void salvarConsulta() const;
 };
 
 #endif // CONSULTA_HPP

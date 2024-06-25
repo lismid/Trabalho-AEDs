@@ -1,3 +1,4 @@
+
 #ifndef MEDICO_HPP
 #define MEDICO_HPP
 
@@ -24,7 +25,10 @@ public:
     const string &getNome() const;
     const string &getTelefone() const;
     const string &getEspecialidade() const;
+    void setNome(const std::string& nome);
+    void setEspecialidade(const std::string& especialidade);
 };
+
 
 vector<Medico> lerMedicos();
 
