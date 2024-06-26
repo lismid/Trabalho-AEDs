@@ -1,10 +1,13 @@
+#ifndef FUNCAOMENU_HPP
+#define FUNCAOMENU_HPP
+
 #include "Paciente.hpp"
 #include "Medico.hpp"
 #include "Data.hpp"
 #include <iostream>
 #include <iomanip> // Para manipulação de formatação de texto
 #include <limits>  // Para limpar o buffer de entrada
-
+#pragma once
 using namespace std;
 
 // Função para listar todos os pacientes
@@ -51,7 +54,7 @@ void listarMedicos(const vector<Medico>& medicos) {
 }
 
 // Função para buscar paciente por nome
-void buscarPaciente(const vector<PACIENTE>& pacientes, const string& nome) {
+void buscarPacientenome(const vector<PACIENTE>& pacientes, const string& nome) {
     bool encontrado = false;
     for (const auto& paciente : pacientes) {
         if (paciente.getNome() == nome) {
@@ -76,7 +79,7 @@ void buscarPaciente(const vector<PACIENTE>& pacientes, const string& nome) {
 }
 
 // Função para buscar paciente por código
-void buscarPaciente(const vector<PACIENTE>& pacientes, int codigo) {
+void buscarPacientecodigo(const vector<PACIENTE>& pacientes, int codigo) {
     bool encontrado = false;
     for (const auto& paciente : pacientes) {
         if (paciente.getCodigoPaciente() == codigo) {
@@ -101,7 +104,7 @@ void buscarPaciente(const vector<PACIENTE>& pacientes, int codigo) {
 }
 
 // Função para buscar médico por nome
-void buscarMedico(const vector<Medico>& medicos, const string& nome) {
+void buscarMediconome(const vector<Medico>& medicos, const string& nome) {
     bool encontrado = false;
     for (const auto& medico : medicos) {
         if (medico.getNome() == nome) {
@@ -119,7 +122,7 @@ void buscarMedico(const vector<Medico>& medicos, const string& nome) {
 }
 
 // Função para buscar médico por código
-void buscarMedico(const vector<Medico>& medicos, int codigo) {
+void buscarMedicocodigo(const vector<Medico>& medicos, int codigo) {
     bool encontrado = false;
     for (const auto& medico : medicos) {
         if (medico.getCodigo() == codigo) {
@@ -188,7 +191,6 @@ void editarPaciente(vector<PACIENTE>& pacientes, int codigo) {
     }
 }
 
-// Função para editar médico por código
 void editarMedico(vector<Medico>& medicos, int codigo) {
     bool encontrado = false;
     for (auto& medico : medicos) {
@@ -249,9 +251,4 @@ void limparBuffer() {
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
 
-// Função principal do menu de cadastro
-void menuCadastro() {
-    vector<PACIENTE> pacientes;
-    vector<Medico> medicos;
-    bool marcado = true;
-
+#endif

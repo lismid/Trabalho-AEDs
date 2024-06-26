@@ -1,4 +1,4 @@
-#include "/home/julio/Documentos/Trabalho-AEDs/Classes/Consulta.hpp"
+#include "../Classes/Consulta.hpp"
 #include <iostream>
 #include <fstream>
 #include <vector>

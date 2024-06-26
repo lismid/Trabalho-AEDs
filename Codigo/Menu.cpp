@@ -1,13 +1,11 @@
-#include <iostream>
 #include <string>
 #include <fstream>
-#include <vector>
 #include <sstream>
 #include <algorithm>
-#include "/home/julio/Documentos/Trabalho-AEDs/Classes/Menu.hpp"
+#include "../Classes/Relatorio.hpp"
+#include "../Classes/Menu.hpp"
 
 using namespace std;
-
 
 void menu()
 {
@@ -49,13 +47,14 @@ void menu()
     }
 }
 
-
-void menuConsulta() {
+void menuConsulta()
+{
     int escolha;
     bool marcado = true;
     vector<CONSULTA> consultas;
 
-    while (marcado) {
+    while (marcado)
+    {
         cout << "<------------------------------->" << endl;
         cout << "\tMenu Consultas" << endl;
         cout << "<------------------------------->" << endl;
@@ -65,56 +64,63 @@ void menuConsulta() {
         cout << "Escolha uma opção: ";
         cin >> escolha;
 
-        switch (escolha) {
-            case 1: {
-                int codigoPaciente, codigoMedico, dia, mes, ano, horas, minutos;
+        switch (escolha)
+        {
+        case 1:
+        {
+            int codigoPaciente, codigoMedico, dia, mes, ano, horas, minutos;
 
-                cout << "Informe o código do paciente: ";
-                cin >> codigoPaciente;
-                cout << "Informe o código do médico: ";
-                cin >> codigoMedico;
-                cout << "Informe a data da consulta (dd mm aaaa hh mm): ";
-                cin >> dia >> mes >> ano >> horas >> minutos;
+            cout << "Informe o código do paciente: ";
+            cin >> codigoPaciente;
+            cout << "Informe o código do médico: ";
+            cin >> codigoMedico;
+            cout << "Informe a data da consulta (dd mm aaaa hh mm): ";
+            cin >> dia >> mes >> ano >> horas >> minutos;
 
-                CONSULTA consulta;
-                consulta.agendarConsulta(codigoPaciente, codigoMedico, dia, mes, ano, horas, minutos);
-                consultas.push_back(consulta);
+            CONSULTA consulta;
+            consulta.agendarConsulta(codigoPaciente, codigoMedico, dia, mes, ano, horas, minutos);
+            consultas.push_back(consulta);
 
-                break;
+            break;
+        }
+        case 2:
+        {
+            int codigoConsulta;
+
+            cout << "Informe o código da consulta a cancelar: ";
+            cin >> codigoConsulta;
+
+            auto it = find_if(consultas.begin(), consultas.end(), [codigoConsulta](const CONSULTA &consulta)
+                              { return consulta.getCodigoConsulta() == codigoConsulta; });
+
+            if (it != consultas.end())
+            {
+                it->cancelarConsulta();
+                consultas.erase(it);
             }
-            case 2: {
-                int codigoConsulta;
-
-                cout << "Informe o código da consulta a cancelar: ";
-                cin >> codigoConsulta;
-
-                auto it = find_if(consultas.begin(), consultas.end(), [codigoConsulta](const CONSULTA& consulta) {
-                    return consulta.getCodigoConsulta() == codigoConsulta;
-                });
-
-                if (it != consultas.end()) {
-                    it->cancelarConsulta();
-                    consultas.erase(it);
-                } else {
-                    cout << "Consulta não encontrada." << endl;
-                }
-
-                break;
+            else
+            {
+                cout << "Consulta não encontrada." << endl;
             }
-            case 3:
-                marcado = false;
-                break;
-            default:
-                cout << "Opção inválida, por favor tente novamente." << endl;
-                break;
+
+            break;
+        }
+        case 3:
+            marcado = false;
+            break;
+        default:
+            cout << "Opção inválida, por favor tente novamente." << endl;
+            break;
         }
     }
 }
-void menuCadastro() {
+void menuCadastro()
+{
     vector<PACIENTE> pacientes;
     vector<Medico> medicos;
     bool marcado = true;
-while(marcado){
+    while (marcado)
+    {
         cout << "<------------------------------->" << endl;
         cout << "\tMenu Cadastro" << endl;
         cout << "<------------------------------->" << endl;
@@ -133,150 +139,172 @@ while(marcado){
         int escolha;
         cin >> escolha;
 
-        switch (escolha) {
-            case 1: {
-                string nome, logradouro, bairro, complemento, cidade, estado;
-                long int telefone, cep;
-                int numero;
-                int dia, mes, ano;
+        switch (escolha)
+        {
+        case 1:
+        {
+            string nome, logradouro, bairro, complemento, cidade, estado;
+            long int telefone, cep;
+            int numero;
+            int dia, mes, ano;
 
+            cout << "Informe o nome do paciente: ";
+            cin >> nome;
+            cout << "Informe o telefone do paciente: ";
+            cin >> telefone;
+            cout << "Informe a data de nascimento (dd mm aaaa): ";
+            cin >> dia >> mes >> ano;
+            cout << "Informe o logradouro: ";
+            cin >> logradouro;
+            cout << "Informe o número: ";
+            cin >> numero;
+            cout << "Informe o bairro: ";
+            cin >> bairro;
+            cout << "Informe o complemento: ";
+            cin >> complemento;
+            cout << "Informe o CEP: ";
+            cin >> cep;
+            cout << "Informe a cidade: ";
+            cin >> cidade;
+            cout << "Informe o estado: ";
+            cin >> estado;
+
+            // Criar um novo objeto de PACIENTE
+            PACIENTE novoPaciente(nome, telefone, DATA(dia, mes, ano), logradouro, numero, bairro,
+                                  complemento, cep, cidade, estado, pacientes.size() + 1);
+            // Adicionar o paciente ao vetor
+            pacientes.push_back(novoPaciente);
+
+            cout << "Paciente cadastrado com sucesso!" << endl;
+            break;
+        }
+        case 2:
+        {
+            int opcaoBusca;
+            cout << "Escolha uma opção de busca:" << endl;
+            cout << "1. Buscar por nome" << endl;
+            cout << "2. Buscar por código" << endl;
+            cin >> opcaoBusca;
+
+            if (opcaoBusca == 1)
+            {
+                string nome;
                 cout << "Informe o nome do paciente: ";
                 cin >> nome;
-                cout << "Informe o telefone do paciente: ";
-                cin >> telefone;
-                cout << "Informe a data de nascimento (dd mm aaaa): ";
-                cin >> dia >> mes >> ano;
-                cout << "Informe o logradouro: ";
-                cin >> logradouro;
-                cout << "Informe o número: ";
-                cin >> numero;
-                cout << "Informe o bairro: ";
-                cin >> bairro;
-                cout << "Informe o complemento: ";
-                cin >> complemento;
-                cout << "Informe o CEP: ";
-                cin >> cep;
-                cout << "Informe a cidade: ";
-                cin >> cidade;
-                cout << "Informe o estado: ";
-                cin >> estado;
-
-                // Criar um novo objeto de PACIENTE
-                PACIENTE novoPaciente(nome, telefone, DATA(dia, mes, ano), logradouro, numero, bairro,
-                                      complemento, cep, cidade, estado, pacientes.size() + 1);
-                // Adicionar o paciente ao vetor
-                pacientes.push_back(novoPaciente);
-
-                cout << "Paciente cadastrado com sucesso!" << endl;
-                break;
+                buscarPacientenome(pacientes, nome);
             }
-            case 2: {
-                int opcaoBusca;
-                cout << "Escolha uma opção de busca:" << endl;
-                cout << "1. Buscar por nome" << endl;
-                cout << "2. Buscar por código" << endl;
-                cin >> opcaoBusca;
-
-                if (opcaoBusca == 1) {
-                    string nome;
-                    cout << "Informe o nome do paciente: ";
-                    cin >> nome;
-                    buscarPaciente(pacientes, nome);
-                } else if (opcaoBusca == 2) {
-                    int codigo;
-                    cout << "Informe o código do paciente: ";
-                    cin >> codigo;
-                    buscarPaciente(pacientes, codigo);
-                } else {
-                    cout << "Opção inválida." << endl;
-                }
-                break;
-            }
-            case 3: {
-                listarPacientes(pacientes);
-                break;
-            }
-            case 4: {
+            else if (opcaoBusca == 2)
+            {
                 int codigo;
-                cout << "Informe o código do paciente que deseja editar: ";
+                cout << "Informe o código do paciente: ";
                 cin >> codigo;
-                editarPaciente(pacientes, codigo);
-                break;
+                buscarPacientecodigo(pacientes, codigo);
             }
-            case 5: {
-                int codigo;
-                cout << "Informe o código do paciente que deseja remover: ";
-                cin >> codigo;
-                removerPaciente(pacientes, codigo);
-                break;
+            else
+            {
+                cout << "Opção inválida." << endl;
             }
-            case 6: {
-                string nome, especialidade;
+            break;
+        }
+        case 3:
+        {
+            listarPacientes(pacientes);
+            break;
+        }
+        case 4:
+        {
+            int codigo;
+            cout << "Informe o código do paciente que deseja editar: ";
+            cin >> codigo;
+            editarPaciente(pacientes, codigo);
+            break;
+        }
+        case 5:
+        {
+            int codigo;
+            cout << "Informe o código do paciente que deseja remover: ";
+            cin >> codigo;
+            removerPaciente(pacientes, codigo);
+            break;
+        }
+        case 6:
+        {
+            string nome, especialidade;
 
+            cout << "Informe o nome do médico: ";
+            cin >> nome;
+            cout << "Informe a especialidade do médico: ";
+            cin >> especialidade;
+
+            // Criar um novo objeto de Medico
+            Medico novoMedico(medicos.size() + 1, nome, especialidade);
+            // Adicionar o médico ao vetor
+            medicos.push_back(novoMedico);
+
+            cout << "Médico cadastrado com sucesso!" << endl;
+            break;
+        }
+        case 7:
+        {
+            int opcaoBusca;
+            cout << "Escolha uma opção de busca:" << endl;
+            cout << "1. Buscar por nome" << endl;
+            cout << "2. Buscar por código" << endl;
+            cin >> opcaoBusca;
+
+            if (opcaoBusca == 1)
+            {
+                string nome;
                 cout << "Informe o nome do médico: ";
                 cin >> nome;
-                cout << "Informe a especialidade do médico: ";
-                cin >> especialidade;
-
-                // Criar um novo objeto de Medico
-                Medico novoMedico(medicos.size() + 1, nome, especialidade);
-                // Adicionar o médico ao vetor
-                medicos.push_back(novoMedico);
-
-                cout << "Médico cadastrado com sucesso!" << endl;
-                break;
+                buscarMediconome(medicos, nome);
             }
-            case 7: {
-                int opcaoBusca;
-                cout << "Escolha uma opção de busca:" << endl;
-                cout << "1. Buscar por nome" << endl;
-                cout << "2. Buscar por código" << endl;
-                cin >> opcaoBusca;
-
-                if (opcaoBusca == 1) {
-                    string nome;
-                    cout << "Informe o nome do médico: ";
-                    cin >> nome;
-                    buscarMedico(medicos, nome);
-                } else if (opcaoBusca == 2) {
-                    int codigo;
-                    cout << "Informe o código do médico: ";
-                    cin >> codigo;
-                    buscarMedico(medicos, codigo);
-                } else {
-                    cout << "Opção inválida." << endl;
-                }
-                break;
-            }
-            case 8: {
-                listarMedicos(medicos);
-                break;
-            }
-            case 9: {
+            else if (opcaoBusca == 2)
+            {
                 int codigo;
-                cout << "Informe o código do médico que deseja editar: ";
+                cout << "Informe o código do médico: ";
                 cin >> codigo;
-                editarMedico(medicos, codigo);
-                break;
+                buscarMedicocodigo(medicos, codigo);
             }
-            case 10: {
-                int codigo;
-                cout << "Informe o código do médico que deseja remover: ";
-                cin >> codigo;
-                removerMedico(medicos, codigo);
-                break;
+            else
+            {
+                cout << "Opção inválida." << endl;
             }
-            case 11:
-                marcado = false;
-                break;
-            default:
-                cout << "Opção inválida, por favor tente novamente." << endl;
-                break;
+            break;
+        }
+        case 8:
+        {
+            listarMedicos(medicos);
+            break;
+        }
+        case 9:
+        {
+            int codigo;
+            cout << "Informe o código do médico que deseja editar: ";
+            cin >> codigo;
+            editarMedico(medicos, codigo);
+            break;
+        }
+        case 10:
+        {
+            int codigo;
+            cout << "Informe o código do médico que deseja remover: ";
+            cin >> codigo;
+            removerMedico(medicos, codigo);
+            break;
+        }
+        case 11:
+            marcado = false;
+            break;
+        default:
+            cout << "Opção inválida, por favor tente novamente." << endl;
+            break;
         }
 
         // Limpar o buffer de entrada
         limparBuffer();
-    }}
+    }
+}
 
 void menuHorarios()
 {

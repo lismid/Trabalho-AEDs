@@ -2,7 +2,7 @@
 #define DATA_H
 
 #include <string>
-
+#pragma once
 class DATA {
 private:
     int dia;

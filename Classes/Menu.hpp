@@ -2,14 +2,13 @@
 #define MENU_HPP
 
 #include <iostream>
-#include <string>
 #include <vector>
 #include "Consulta.hpp"
 #include "Medico.hpp"
 #include "Paciente.hpp"
-#include "FunçaoMenu.hpp"
+#include "FuncaoMenu.hpp"
 #include "Relatorio.hpp"
-
+#pragma once
 using namespace std;
 
 void menuConsulta();

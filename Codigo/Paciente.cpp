@@ -1,5 +1,5 @@
 
-#include "/home/julio/Documentos/Trabalho-AEDs/Classes/Paciente.hpp"
+#include "../Classes/Paciente.hpp"
 using namespace std;
 
 // Construtor

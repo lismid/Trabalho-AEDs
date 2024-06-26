@@ -5,7 +5,7 @@
 #include "Paciente.hpp"
 #include "Data.hpp"
 #include <vector>
-
+#pragma once
 class CONSULTA {
 private:
     int codigoConsulta;
