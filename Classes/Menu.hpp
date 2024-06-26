@@ -6,7 +6,7 @@
 #include "Consulta.hpp"
 #include "Medico.hpp"
 #include "Paciente.hpp"
-#include "FuncaoMenu.hpp"
+//#include "FuncaoMenu.hpp"
 #include "Relatorio.hpp"
 #pragma once
 using namespace std;

@@ -70,6 +70,13 @@ void cadastrarMedico() {
     salvarMedicos(medicos);
 
     cout << "Médico cadastrado com sucesso!" << endl;
+
+}
+const std::string& Medico::getEspecialidade() const {
+    return especialidade;
+}
+void Medico::cadastrar() {
+    std::cout << "Cadastrando médico: " << nome << " com especialidade: " << especialidade << std::endl;
 }
 
 
