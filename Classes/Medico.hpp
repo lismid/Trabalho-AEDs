@@ -21,9 +21,9 @@ public:
 
     void cadastrar();
 
-    int getCodigo() const;
-    const string &getNome() const;
-    const string &getTelefone() const;
+    int getCodigo() const {return codigo;};
+    const string &getNome() const{return nome;};
+    const string &getTelefone() const{return especialidade;} ;
     const string &getEspecialidade() const;
     void setNome(const std::string& nome);
     void setEspecialidade(const std::string& especialidade);

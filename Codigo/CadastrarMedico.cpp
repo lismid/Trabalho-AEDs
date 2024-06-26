@@ -71,3 +71,11 @@ void cadastrarMedico() {
 
     cout << "Médico cadastrado com sucesso!" << endl;
 }
+
+void Medico::setNome(const string& nome) {
+    this->nome = nome;
+}
+
+void Medico::setEspecialidade(const string& especialidade) {
+    this->especialidade = especialidade;
+}
