@@ -324,8 +324,6 @@ void menu() {
                 cout << "Opção inválida, por favor tente novamente." << endl;
                 break;
         }
-
-        break;
     }
 }
 
@@ -637,7 +635,7 @@ int menuCadastro()
         }
         case 11:
             marcado = false;
-            break;
+            return 1;
         default:
             cout << "Opção inválida, por favor tente novamente." << endl;
             break;
@@ -646,6 +644,7 @@ int menuCadastro()
         // Limpar o buffer de entrada
         limparBuffer();
     }
+    return 1;
 }
 
 void menuHorarios()
