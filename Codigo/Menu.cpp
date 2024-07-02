@@ -290,11 +290,10 @@ void limparBuffer()
 }
 
 void menu() {
-    int escolha;
+    int escolha, retorno;
     bool continuar = true;
 
-    while (continuar)
-    {
+    while (continuar) {
         cout << "<------------------------------->" << endl;
         cout << "\tMenu Principal" << endl;
         cout << "<------------------------------->" << endl;
@@ -307,23 +306,26 @@ void menu() {
 
         switch (escolha)
         {
-
-        case 1:
-            menuConsulta();
-            break;
-        case 2:
-            menuCadastro();
-            break;
-        case 3:
-            menuHorarios();
-            break;
-        case 0:
-            exit(1);
-        default:
-            cout << "Opção inválida, por favor tente novamente." << endl;
-
-            break;
+            case 0:
+                continuar = false;
+                break;
+            case 1:
+                menuConsulta();
+                break;
+            case 2:
+                retorno = menuCadastro();
+                if (retorno == 0) 
+                    continuar = false;
+                break;
+            case 3:
+                menuHorarios();
+                break;
+            default:
+                cout << "Opção inválida, por favor tente novamente." << endl;
+                break;
         }
+
+        break;
     }
 }
 
@@ -333,8 +335,7 @@ void menuConsulta() {
     bool marcado = true;
     vector<CONSULTA> consultas;
 
-    while (marcado)
-    {
+    while (marcado) {
         cout << "<------------------------------->" << endl;
         cout << "\tMenu Consultas" << endl;
         cout << "<------------------------------->" << endl;
@@ -400,9 +401,11 @@ void menuConsulta() {
 
                 // Criar e adicionar a consulta ao vetor de consultas
                 CONSULTA consulta;
-                consulta.agendarConsulta(codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta);
+                //agendarConsulta() está causando um loop infinito
+                //consulta.agendarConsulta(codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta);
                 consultas.push_back(consulta);
 
+                marcado = false;
                 break;
             }
             case 2:
@@ -424,7 +427,7 @@ void menuConsulta() {
                 {
                     cout << "Consulta não encontrada." << endl;
                 }
-
+                marcado = false;
                 break;
             }
             case 3:
@@ -433,10 +436,12 @@ void menuConsulta() {
             default:
                 cout << "Opção inválida, por favor tente novamente." << endl;
                 break;
-            }
         }
+        break;
+    }
 }
-void menuCadastro()
+
+int menuCadastro()
 {
     vector<PACIENTE> pacientes;
     vector<Medico> medicos;
@@ -492,7 +497,6 @@ void menuCadastro()
             getline(cin, bairro);
 
             cout << "Informe o complemento: ";
-            limparBuffer(); // Limpar o buffer antes de getline
             getline(cin, complemento);
 
             cout << "Informe o CEP: ";
@@ -512,6 +516,7 @@ void menuCadastro()
             pacientes.push_back(novoPaciente);
 
             cout << "Paciente cadastrado com sucesso!" << endl;
+            cout << "Código do paciente: " << novoPaciente.getCodigoPaciente() << endl;
             break;
         }
         case 2:
@@ -578,6 +583,7 @@ void menuCadastro()
             medicos.push_back(novoMedico);
 
             cout << "Médico cadastrado com sucesso!" << endl;
+            cout << "Código do medico: " << novoMedico.getCodigo() << endl;
             break;
         }
         case 7:

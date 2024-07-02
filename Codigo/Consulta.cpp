@@ -67,12 +67,18 @@ bool validarHora(const string &horaInput)
     return true;
 }
 
+//Tem um loop infinito
 void CONSULTA::agendarConsulta(int codigoPaciente, int codigoMedico, int dia, int mes, int ano, int horas, int minutos) {
+    
     string dataInput;
     do {
         cout << "Informe a data da consulta (dd/mm/aaaa): ";
         cin >> dataInput;
-    } while (!validarData(dataInput));
+
+        //Se a data for válida, sai do loop
+        if(validarData(dataInput))
+            break;
+    } while (true);
 
     int diaConsulta, mesConsulta, anoConsulta;
     try {
@@ -88,7 +94,11 @@ void CONSULTA::agendarConsulta(int codigoPaciente, int codigoMedico, int dia, in
     do {
         cout << "Informe a hora da consulta (hh:mm): ";
         cin >> horaInput;
-    } while (!validarHora(horaInput));
+
+        //Se a hora for válida, sai do loop
+        if(validarHora(horaInput))
+            break;
+    } while (true);
 
     int horasConsulta, minutosConsulta;
     try {
