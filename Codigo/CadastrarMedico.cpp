@@ -23,7 +23,7 @@ vector<Medico> lerMedicos() {
     arquivo.close();
     return medicos;
 }
-void Medico::setEspecialidade(const std::string& especialidade) {
+void Medico::setEspecialidade(const string& especialidade) {
     this->especialidade = especialidade;
 }
 
@@ -42,7 +42,7 @@ void salvarMedicos(const vector<Medico>& medicos) {
 
     arquivo.close();
 }
-void Medico::setNome(const std::string& nome) {
+void Medico::setNome(const string& nome) {
     this->nome = nome;
 }
 
@@ -72,11 +72,11 @@ void cadastrarMedico() {
     cout << "Médico cadastrado com sucesso!" << endl;
 
 }
-const std::string& Medico::getEspecialidade() const {
+const string& Medico::getEspecialidade() const {
     return especialidade;
 }
 void Medico::cadastrar() {
-    std::cout << "Cadastrando médico: " << nome << " com especialidade: " << especialidade << std::endl;
+    cout << "Cadastrando médico: " << nome << " com especialidade: " << especialidade << endl;
 }
 
 

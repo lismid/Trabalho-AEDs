@@ -1,5 +1,5 @@
 
-#include "..\Classes\Relatorio.hpp"
+#include "../Classes/Relatorio.hpp"
 #include <iostream>
 #include <fstream>
 #include <vector>

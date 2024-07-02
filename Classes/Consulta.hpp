@@ -10,14 +10,14 @@ class CONSULTA {
 private:
     int codigoConsulta;
     DATA dataConsulta;
-    Medico* medico;
-    PACIENTE* paciente;
+    Medico *medico;
+    PACIENTE *paciente;
 
 public:
     CONSULTA();
     CONSULTA(int codigoConsulta, const Medico& medico, const PACIENTE& paciente, const DATA& dataConsulta);
     ~CONSULTA();
-
+    
     void agendarConsulta(int codigoPaciente, int codigoMedico, int dia, int mes, int ano, int horas, int minutos);
     int getCodigoMedico() const;
     int getCodigoPaciente() const;
@@ -29,4 +29,4 @@ public:
     void salvarConsulta() const;
 };
 
-#endif // CONSULTA_HPP
+#endif 

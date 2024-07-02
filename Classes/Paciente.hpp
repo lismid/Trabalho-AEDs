@@ -24,7 +24,8 @@ public:
     // Construtor
     PACIENTE(const string &n, long int tel, const DATA &dataNasc, const string &log, int num,
             const string &bai, const string &comp, long int cep, const string &cid,
-            const string &est, long int codPaciente);
+            const string &est, long int codPaciente): nome(n),telefone(tel),dataNascimento(dataNasc), logradouro(log),numero(num),bairro(bai),
+            complemento(comp),CEP(cep),cidade(cid),estado(est),codigoPaciente(codPaciente){}
 
     // Getters
     string getNome() const;

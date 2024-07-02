@@ -1,6 +1,6 @@
 #include <string>
-#include <iomanip> 
-#include <limits> 
+#include <iomanip>
+#include <limits>
 #include <fstream>
 #include <sstream>
 #include <algorithm>
@@ -11,15 +11,20 @@
 #include "../Classes/Data.hpp"
 using namespace std;
 
-void listarPacientes(vector <PACIENTE> pacientes) {
+void listarPacientes(vector<PACIENTE> pacientes)
+{
     cout << "<------------------------------->" << endl;
     cout << "\tLista de Pacientes" << endl;
     cout << "<------------------------------->" << endl;
 
-    if (pacientes.empty()) {
+    if (pacientes.empty())
+    {
         cout << "Nenhum paciente cadastrado." << endl;
-    } else {
-        for (const auto& paciente : pacientes) {
+    }
+    else
+    {
+        for (const auto &paciente : pacientes)
+        {
             cout << "Código: " << paciente.getCodigoPaciente() << endl;
             cout << "Nome: " << paciente.getNome() << endl;
             cout << "Telefone: " << paciente.getTelefone() << endl;
@@ -36,15 +41,20 @@ void listarPacientes(vector <PACIENTE> pacientes) {
 }
 
 // Função para listar todos os médicos
-void listarMedicos(const vector<Medico>& medicos) {
+void listarMedicos(const vector<Medico> &medicos)
+{
     cout << "<------------------------------->" << endl;
     cout << "\tLista de Médicos" << endl;
     cout << "<------------------------------->" << endl;
 
-    if (medicos.empty()) {
+    if (medicos.empty())
+    {
         cout << "Nenhum médico cadastrado." << endl;
-    } else {
-        for (const auto& medico : medicos) {
+    }
+    else
+    {
+        for (const auto &medico : medicos)
+        {
             cout << "Código: " << medico.getCodigo() << endl;
             cout << "Nome: " << medico.getNome() << endl;
             cout << "Especialidade: " << medico.getEspecialidade() << endl;
@@ -54,10 +64,13 @@ void listarMedicos(const vector<Medico>& medicos) {
 }
 
 // Função para buscar paciente por nome
-void buscarPacientenome(const vector<PACIENTE>& pacientes, const string& nome) {
+void buscarPacientenome(const vector<PACIENTE> &pacientes, const string &nome)
+{
     bool encontrado = false;
-    for (const auto& paciente : pacientes) {
-        if (paciente.getNome() == nome) {
+    for (const auto &paciente : pacientes)
+    {
+        if (paciente.getNome() == nome)
+        {
             cout << "Paciente encontrado:" << endl;
             cout << "Código: " << paciente.getCodigoPaciente() << endl;
             cout << "Nome: " << paciente.getNome() << endl;
@@ -73,16 +86,20 @@ void buscarPacientenome(const vector<PACIENTE>& pacientes, const string& nome) {
             break;
         }
     }
-    if (!encontrado) {
+    if (!encontrado)
+    {
         cout << "Paciente não encontrado." << endl;
     }
 }
 
 // Função para buscar paciente por código
-void buscarPacientecodigo(const vector<PACIENTE>& pacientes, int codigo) {
+void buscarPacientecodigo(const vector<PACIENTE> &pacientes, int codigo)
+{
     bool encontrado = false;
-    for (const auto& paciente : pacientes) {
-        if (paciente.getCodigoPaciente() == codigo) {
+    for (const auto &paciente : pacientes)
+    {
+        if (paciente.getCodigoPaciente() == codigo)
+        {
             cout << "Paciente encontrado:" << endl;
             cout << "Código: " << paciente.getCodigoPaciente() << endl;
             cout << "Nome: " << paciente.getNome() << endl;
@@ -98,16 +115,20 @@ void buscarPacientecodigo(const vector<PACIENTE>& pacientes, int codigo) {
             break;
         }
     }
-    if (!encontrado) {
+    if (!encontrado)
+    {
         cout << "Paciente não encontrado." << endl;
     }
 }
 
 // Função para buscar médico por nome
-void buscarMediconome(const vector<Medico>& medicos, const string& nome) {
+void buscarMediconome(const vector<Medico> &medicos, const string &nome)
+{
     bool encontrado = false;
-    for (const auto& medico : medicos) {
-        if (medico.getNome() == nome) {
+    for (const auto &medico : medicos)
+    {
+        if (medico.getNome() == nome)
+        {
             cout << "Médico encontrado:" << endl;
             cout << "Código: " << medico.getCodigo() << endl;
             cout << "Nome: " << medico.getNome() << endl;
@@ -116,16 +137,20 @@ void buscarMediconome(const vector<Medico>& medicos, const string& nome) {
             break;
         }
     }
-    if (!encontrado) {
+    if (!encontrado)
+    {
         cout << "Médico não encontrado." << endl;
     }
 }
 
 // Função para buscar médico por código
-void buscarMedicocodigo(const vector<Medico>& medicos, int codigo) {
+void buscarMedicocodigo(const vector<Medico> &medicos, int codigo)
+{
     bool encontrado = false;
-    for (const auto& medico : medicos) {
-        if (medico.getCodigo() == codigo) {
+    for (const auto &medico : medicos)
+    {
+        if (medico.getCodigo() == codigo)
+        {
             cout << "Médico encontrado:" << endl;
             cout << "Código: " << medico.getCodigo() << endl;
             cout << "Nome: " << medico.getNome() << endl;
@@ -134,16 +159,20 @@ void buscarMedicocodigo(const vector<Medico>& medicos, int codigo) {
             break;
         }
     }
-    if (!encontrado) {
+    if (!encontrado)
+    {
         cout << "Médico não encontrado." << endl;
     }
 }
 
 // Função para editar paciente por código
-void editarPaciente(vector<PACIENTE>& pacientes, int codigo) {
+void editarPaciente(vector<PACIENTE> &pacientes, int codigo)
+{
     bool encontrado = false;
-    for (auto& paciente : pacientes) {
-        if (paciente.getCodigoPaciente() == codigo) {
+    for (auto &paciente : pacientes)
+    {
+        if (paciente.getCodigoPaciente() == codigo)
+        {
             string nome, logradouro, bairro, complemento, cidade, estado;
             long int telefone, cep;
             int numero;
@@ -186,15 +215,19 @@ void editarPaciente(vector<PACIENTE>& pacientes, int codigo) {
             break;
         }
     }
-    if (!encontrado) {
+    if (!encontrado)
+    {
         cout << "Paciente não encontrado." << endl;
     }
 }
 
-void editarMedico(vector<Medico>& medicos, int codigo) {
+void editarMedico(vector<Medico> &medicos, int codigo)
+{
     bool encontrado = false;
-    for (auto& medico : medicos) {
-        if (medico.getCodigo() == codigo) {
+    for (auto &medico : medicos)
+    {
+        if (medico.getCodigo() == codigo)
+        {
             string nome, especialidade;
 
             cout << "Informe o novo nome do médico: ";
@@ -210,20 +243,26 @@ void editarMedico(vector<Medico>& medicos, int codigo) {
             break;
         }
     }
-    if (!encontrado) {
+    if (!encontrado)
+    {
         cout << "Médico não encontrado." << endl;
     }
 }
 
 // Função para remover paciente por código
-void removerPaciente(vector<PACIENTE>& pacientes, int codigo) {
+void removerPaciente(vector<PACIENTE> &pacientes, int codigo)
+{
     auto it = pacientes.begin();
-    while (it != pacientes.end()) {
-        if (it->getCodigoPaciente() == codigo) {
+    while (it != pacientes.end())
+    {
+        if (it->getCodigoPaciente() == codigo)
+        {
             it = pacientes.erase(it);
             cout << "Paciente removido com sucesso!" << endl;
             return;
-        } else {
+        }
+        else
+        {
             ++it;
         }
     }
@@ -231,14 +270,19 @@ void removerPaciente(vector<PACIENTE>& pacientes, int codigo) {
 }
 
 // Função para remover médico por código
-void removerMedico(vector<Medico>& medicos, int codigo) {
+void removerMedico(vector<Medico> &medicos, int codigo)
+{
     auto it = medicos.begin();
-    while (it != medicos.end()) {
-        if (it->getCodigo() == codigo) {
+    while (it != medicos.end())
+    {
+        if (it->getCodigo() == codigo)
+        {
             it = medicos.erase(it);
             cout << "Médico removido com sucesso!" << endl;
             return;
-        } else {
+        }
+        else
+        {
             ++it;
         }
     }
@@ -246,7 +290,8 @@ void removerMedico(vector<Medico>& medicos, int codigo) {
 }
 
 // Função para limpar o buffer de entrada
-void limparBuffer() {
+void limparBuffer()
+{
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
@@ -289,7 +334,7 @@ void menu()
         }
     }
 }
-
+DATA date;
 void menuConsulta()
 {
     int escolha;
@@ -315,13 +360,51 @@ void menuConsulta()
 
             cout << "Informe o código do paciente: ";
             cin >> codigoPaciente;
+
             cout << "Informe o código do médico: ";
             cin >> codigoMedico;
-            cout << "Informe a data da consulta (dd mm aaaa hh mm): ";
-            cin >> dia >> mes >> ano >> horas >> minutos;
+
+            string dataInput;
+            do
+            {
+                cout << "Informe a data da consulta (dd/mm/aaaa): ";
+                cin >> dataInput;
+            } while (!date.validarData(dataInput));
+
+            int diaConsulta, mesConsulta, anoConsulta;
+            try
+            {
+                diaConsulta = stoi(dataInput.substr(0, 2));
+                mesConsulta = stoi(dataInput.substr(3, 2));
+                anoConsulta = stoi(dataInput.substr(6, 4));
+            }
+            catch (const std::invalid_argument &e)
+            {
+                cout << "Erro ao converter data. Consulta não agendada." << endl;
+                return;
+            }
+
+            string horaInput;
+            do
+            {
+                cout << "Informe a hora da consulta (hh:mm): ";
+                cin >> horaInput;
+            } while (!validarHora(horaInput));
+
+            int horasConsulta, minutosConsulta;
+            try
+            {
+                horasConsulta = stoi(horaInput.substr(0, 2));
+                minutosConsulta = stoi(horaInput.substr(3, 2));
+            }
+            catch (const std::invalid_argument &e)
+            {
+                cout << "Erro ao converter hora. Consulta não agendada." << endl;
+                return;
+            }
 
             CONSULTA consulta;
-            consulta.agendarConsulta(codigoPaciente, codigoMedico, dia, mes, ano, horas, minutos);
+            consulta.agendarConsulta(codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta);
             consultas.push_back(consulta);
 
             break;
@@ -392,25 +475,39 @@ void menuCadastro()
             int dia, mes, ano;
 
             cout << "Informe o nome do paciente: ";
-            cin >> nome;
+            limparBuffer(); // Limpar o buffer antes de getline
+            getline(cin, nome);
+
             cout << "Informe o telefone do paciente: ";
             cin >> telefone;
+
             cout << "Informe a data de nascimento (dd mm aaaa): ";
             cin >> dia >> mes >> ano;
+
+            limparBuffer(); // Limpar o buffer antes de getline
             cout << "Informe o logradouro: ";
-            cin >> logradouro;
+            getline(cin, logradouro);
+
             cout << "Informe o número: ";
             cin >> numero;
+
+            limparBuffer(); // Limpar o buffer antes de getline
             cout << "Informe o bairro: ";
-            cin >> bairro;
+            getline(cin, bairro);
+
             cout << "Informe o complemento: ";
-            cin >> complemento;
+            limparBuffer(); // Limpar o buffer antes de getline
+            getline(cin, complemento);
+
             cout << "Informe o CEP: ";
             cin >> cep;
+
+            limparBuffer(); // Limpar o buffer antes de getline
             cout << "Informe a cidade: ";
-            cin >> cidade;
+            getline(cin, cidade);
+
             cout << "Informe o estado: ";
-            cin >> estado;
+            getline(cin, estado);
 
             // Criar um novo objeto de PACIENTE
             PACIENTE novoPaciente(nome, telefone, DATA(dia, mes, ano), logradouro, numero, bairro,
