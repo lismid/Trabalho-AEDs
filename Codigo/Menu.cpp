@@ -1,8 +1,8 @@
 #include <string>
-#include <iomanip>
+//#include <iomanip>
 #include <limits>
-#include <fstream>
-#include <sstream>
+//#include <fstream>
+//#include <sstream>
 #include <algorithm>
 #include "../Classes/Relatorio.hpp"
 #include "../Classes/Menu.hpp"
@@ -11,20 +11,15 @@
 #include "../Classes/Data.hpp"
 using namespace std;
 
-void listarPacientes(vector<PACIENTE> pacientes)
-{
+void listarPacientes(vector<PACIENTE> pacientes) {
     cout << "<------------------------------->" << endl;
     cout << "\tLista de Pacientes" << endl;
     cout << "<------------------------------->" << endl;
 
-    if (pacientes.empty())
-    {
+    if (pacientes.empty()) {
         cout << "Nenhum paciente cadastrado." << endl;
-    }
-    else
-    {
-        for (const auto &paciente : pacientes)
-        {
+    } else {
+        for (const auto &paciente : pacientes) {
             cout << "Código: " << paciente.getCodigoPaciente() << endl;
             cout << "Nome: " << paciente.getNome() << endl;
             cout << "Telefone: " << paciente.getTelefone() << endl;
@@ -93,8 +88,7 @@ void buscarPacientenome(const vector<PACIENTE> &pacientes, const string &nome)
 }
 
 // Função para buscar paciente por código
-void buscarPacientecodigo(const vector<PACIENTE> &pacientes, int codigo)
-{
+void buscarPacientecodigo(const vector<PACIENTE> &pacientes, int codigo) {
     bool encontrado = false;
     for (const auto &paciente : pacientes)
     {
@@ -321,7 +315,6 @@ void menu()
         case 2:
             menuCadastro();
             break;
-
         case 3:
             menuHorarios();
             break;
@@ -334,9 +327,9 @@ void menu()
         }
     }
 }
+
 DATA date;
-void menuConsulta()
-{
+void menuConsulta() {
     int escolha;
     bool marcado = true;
     vector<CONSULTA> consultas;
@@ -352,100 +345,98 @@ void menuConsulta()
         cout << "Escolha uma opção: ";
         cin >> escolha;
 
-        switch (escolha)
-        {
-        case 1:
-        {
-            int codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta;
+        switch (escolha) {
+            case 1:
+            { int codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta;
 
-cout << "Informe o código do paciente: ";
-cin >> codigoPaciente;
+    cout << "Informe o código do paciente: ";
+    cin >> codigoPaciente;
 
-cout << "Informe o código do médico: ";
-cin >> codigoMedico;
+    cout << "Informe o código do médico: ";
+    cin >> codigoMedico;
 
-string dataInput;
-do {
-    cout << "Informe a data da consulta (dd/mm/aaaa): ";
-    cin >> dataInput;
+    string dataInput;
+    do {
+        cout << "Informe a data da consulta (dd/mm/aaaa): ";
+        cin >> dataInput;
 
-    // Analisar a entrada para extrair dia, mês e ano
-    if (sscanf(dataInput.c_str(), "%d/%d/%d", &diaConsulta, &mesConsulta, &anoConsulta) != 3) {
-        cout << "Formato inválido. Use dd/mm/aaaa." << endl;
-        continue;
-    }
-
-    // Validar a data usando os métodos da classe DATA
-    if (!date.validarData(diaConsulta, mesConsulta, anoConsulta)) {
-        cout << "Data inválida. Por favor, informe uma data válida." << endl;
-        continue;
-    }
-
-    // Se chegou aqui, a data está válida
-    break;
-
-} while (true);
-
-string horaInput;
-do {
-    cout << "Informe a hora da consulta (hh:mm): ";
-    cin >> horaInput;
-
-    // Analisar a entrada para extrair horas e minutos
-    if (sscanf(horaInput.c_str(), "%d:%d", &horasConsulta, &minutosConsulta) != 2) {
-        cout << "Formato inválido. Use hh:mm." << endl;
-        continue;
-}
-
-    // Validar a hora usando os métodos da classe DATA
-    if (!date.validarHora(horasConsulta, minutosConsulta)) {
-        cout << "Hora inválida. Por favor, informe uma hora válida." << endl;
-        continue;
-    }
-
-    // Se chegou aqui, a hora está válida
-    break;
-
-} while (true);
-
-// Criar e adicionar a consulta ao vetor de consultas
-CONSULTA consulta;
-consulta.agendarConsulta(codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta);
-consultas.push_back(consulta);
-
-
-            break;
+        // Analisar a entrada para extrair dia, mês e ano
+        if (sscanf(dataInput.c_str(), "%d/%d/%d", &diaConsulta, &mesConsulta, &anoConsulta) != 3) {
+            cout << "Formato inválido. Use dd/mm/aaaa." << endl;
+            continue;
         }
-        case 2:
-        {
-            int codigoConsulta;
 
-            cout << "Informe o código da consulta a cancelar: ";
-            cin >> codigoConsulta;
+        // Validar a data usando os métodos da classe DATA
+        if (!date.validarData(diaConsulta, mesConsulta, anoConsulta)) {
+            cout << "Data inválida. Por favor, informe uma data válida." << endl;
+            continue;
+        }
 
-            auto it = find_if(consultas.begin(), consultas.end(), [codigoConsulta](const CONSULTA &consulta)
-                              { return consulta.getCodigoConsulta() == codigoConsulta; });
+        // Se chegou aqui, a data está válida
+        break;
 
-            if (it != consultas.end())
-            {
-                it->cancelarConsulta();
-                consultas.erase(it);
+    } while (true);
+
+    string horaInput;
+    do {
+        cout << "Informe a hora da consulta (hh:mm): ";
+        cin >> horaInput;
+
+        // Analisar a entrada para extrair horas e minutos
+        if (sscanf(horaInput.c_str(), "%d:%d", &horasConsulta, &minutosConsulta) != 2) {
+            cout << "Formato inválido. Use hh:mm." << endl;
+            continue;
+        }
+
+        // Validar a hora usando os métodos da classe DATA
+        if (!date.validarHora(horasConsulta, minutosConsulta)) {
+            cout << "Hora inválida. Por favor, informe uma hora válida." << endl;
+            continue;
+        }
+
+        // Se chegou aqui, a hora está válida
+        break;
+
+    } while (true);
+
+    // Criar e adicionar a consulta ao vetor de consultas
+    CONSULTA consulta;
+    consulta.agendarConsulta(codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta);
+    consultas.push_back(consulta);
+
+
+                break;
             }
-            else
+            case 2:
             {
-                cout << "Consulta não encontrada." << endl;
-            }
+                int codigoConsulta;
 
-            break;
+                cout << "Informe o código da consulta a cancelar: ";
+                cin >> codigoConsulta;
+
+                auto it = find_if(consultas.begin(), consultas.end(), [codigoConsulta](const CONSULTA &consulta)
+                                { return consulta.getCodigoConsulta() == codigoConsulta; });
+
+                if (it != consultas.end())
+                {
+                    it->cancelarConsulta();
+                    consultas.erase(it);
+                }
+                else
+                {
+                    cout << "Consulta não encontrada." << endl;
+                }
+
+                break;
+            }
+            case 3:
+                marcado = false;
+                break;
+            default:
+                cout << "Opção inválida, por favor tente novamente." << endl;
+                break;
+            }
         }
-        case 3:
-            marcado = false;
-            break;
-        default:
-            cout << "Opção inválida, por favor tente novamente." << endl;
-            break;
-        }
-    }
 }
 void menuCadastro()
 {

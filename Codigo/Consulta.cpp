@@ -100,8 +100,7 @@ void CONSULTA::agendarConsulta(int codigoPaciente, int codigoMedico, int dia, in
     }
 
     DATA dataConsulta(diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta);
-
-    if (!dataConsulta.validarData()) {
+    if (!dataConsulta.validarData(dataConsulta.getDia(), dataConsulta.getMes(), dataConsulta.getAno())) {
         cout << "Data inválida. Consulta não agendada." << endl;
         return;
     }
