@@ -1,5 +1,5 @@
-#ifndef DATA_H
-#define DATA_H
+#ifndef DATA_HPP
+#define DATA_HPP
 
 #include <string>
 #include <stdexcept>
@@ -14,11 +14,14 @@ private:
 
 public:
     DATA() : dia(0), mes(0), ano(0), horas(0), minutos(0) {}
-    DATA(int d, int m, int a) : dia(d), mes(m), ano(a) {}
+    DATA(int d, int m, int a) : dia(d), mes(m), ano(a), horas(0), minutos(0) {
+        if (!validarData(d, m, a)) {
+            throw std::invalid_argument("Data inválida.");
+        }
+    }
     DATA(int d, int m, int a, int h, int mn) : dia(d), mes(m), ano(a), horas(h), minutos(mn) {
-        // Aqui, chame a função de validação diretamente no construtor
-        if (!validarData()) {
-            throw std::invalid_argument("Data e hora inválidas.");
+        if (!validarData(d, m, a) || !validarHora(h, mn)) {
+            throw std::invalid_argument("Data ou hora inválidas.");
         }
     }
 
@@ -30,22 +33,50 @@ public:
     int getMinutos() const { return minutos; }
 
     // Setters com validação básica
-    void setDia(int d) { if (d >= 1 && d <= 31) dia = d; }
-    void setMes(int m) { if (m >= 1 && m <= 12) mes = m; }
-    void setAno(int a) { ano = a; }
-    void setHoras(int h) { if (h >= 0 && h <= 23) horas = h; }
-    void setMinutos(int mn) { if (mn >= 0 && mn <= 59) minutos = mn; }
+    void setDia(int d) { if (validarData(d, mes, ano)) dia = d; }
+    void setMes(int m) { if (validarData(dia, m, ano)) mes = m; }
+    void setAno(int a) { if (validarData(dia, mes, a)) ano = a; }
+    void setHoras(int h) { if (validarHora(h, minutos)) horas = h; }
+    void setMinutos(int mn) { if (validarHora(horas, mn)) minutos = mn; }
 
     // Exibição formatada da data e hora
     std::string getVerData() const {
         return std::to_string(dia) + "/" + std::to_string(mes) + "/" + std::to_string(ano) + " " + std::to_string(horas) + ":" + std::to_string(minutos);
     }
 
-    // Função para validar os dados da data e hora
-    bool validarData() const {
-        if (ano < 0 || mes < 1 || mes > 12 || dia < 1 || dia > diasNoMes(mes, ano) || horas < 0 || horas > 23 || minutos < 0 || minutos > 59) {
+    // Função para validar os dados da data
+    bool validarData(int d, int m, int a) const {
+        if (m < 1 || m > 12) {
             return false;
         }
+
+        if (d < 1) {
+            return false;
+        }
+
+        static const int days_in_month[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+        int max_day = days_in_month[m - 1];
+        
+        if (m == 2) {
+            bool is_leap_year = (a % 4 == 0 && a % 100 != 0) || (a % 400 == 0);
+            if (is_leap_year) {
+                max_day = 29;
+            }
+        }
+
+        return d <= max_day;
+    }
+
+    // Função para validar os dados da hora
+    bool validarHora(int h, int mn) const {
+        if (h < 0 || h > 23) {
+            return false;
+        }
+
+        if (mn < 0 || mn > 59) {
+            return false;
+        }
+
         return true;
     }
 
@@ -81,23 +112,6 @@ public:
 
     bool operator>=(const DATA& outra) const {
         return !(*this < outra);
-    }
-
-private:
-    int diasNoMes(int mes, int ano) const {
-        switch (mes) {
-            case 1: case 3: case 5: case 7: case 8: case 10: case 12:
-                return 31;
-            case 4: case 6: case 9: case 11:
-                return 30;
-            case 2:
-                if ((ano % 4 == 0 && ano % 100 != 0) || ano % 400 == 0)
-                    return 29;
-                else
-                    return 28;
-            default:
-                return -1; // Valor inválido de mês
-        }
     }
 };
 

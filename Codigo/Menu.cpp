@@ -356,56 +356,63 @@ void menuConsulta()
         {
         case 1:
         {
-            int codigoPaciente, codigoMedico, dia, mes, ano, horas, minutos;
+            int codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta;
 
-            cout << "Informe o código do paciente: ";
-            cin >> codigoPaciente;
+cout << "Informe o código do paciente: ";
+cin >> codigoPaciente;
 
-            cout << "Informe o código do médico: ";
-            cin >> codigoMedico;
+cout << "Informe o código do médico: ";
+cin >> codigoMedico;
 
-            string dataInput;
-            do
-            {
-                cout << "Informe a data da consulta (dd/mm/aaaa): ";
-                cin >> dataInput;
-            } while (!date.validarData(dataInput));
+string dataInput;
+do {
+    cout << "Informe a data da consulta (dd/mm/aaaa): ";
+    cin >> dataInput;
 
-            int diaConsulta, mesConsulta, anoConsulta;
-            try
-            {
-                diaConsulta = stoi(dataInput.substr(0, 2));
-                mesConsulta = stoi(dataInput.substr(3, 2));
-                anoConsulta = stoi(dataInput.substr(6, 4));
-            }
-            catch (const std::invalid_argument &e)
-            {
-                cout << "Erro ao converter data. Consulta não agendada." << endl;
-                return;
-            }
+    // Analisar a entrada para extrair dia, mês e ano
+    if (sscanf(dataInput.c_str(), "%d/%d/%d", &diaConsulta, &mesConsulta, &anoConsulta) != 3) {
+        cout << "Formato inválido. Use dd/mm/aaaa." << endl;
+        continue;
+    }
 
-            string horaInput;
-            do
-            {
-                cout << "Informe a hora da consulta (hh:mm): ";
-                cin >> horaInput;
-            } while (!validarHora(horaInput));
+    // Validar a data usando os métodos da classe DATA
+    if (!date.validarData(diaConsulta, mesConsulta, anoConsulta)) {
+        cout << "Data inválida. Por favor, informe uma data válida." << endl;
+        continue;
+    }
 
-            int horasConsulta, minutosConsulta;
-            try
-            {
-                horasConsulta = stoi(horaInput.substr(0, 2));
-                minutosConsulta = stoi(horaInput.substr(3, 2));
-            }
-            catch (const std::invalid_argument &e)
-            {
-                cout << "Erro ao converter hora. Consulta não agendada." << endl;
-                return;
-            }
+    // Se chegou aqui, a data está válida
+    break;
 
-            CONSULTA consulta;
-            consulta.agendarConsulta(codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta);
-            consultas.push_back(consulta);
+} while (true);
+
+string horaInput;
+do {
+    cout << "Informe a hora da consulta (hh:mm): ";
+    cin >> horaInput;
+
+    // Analisar a entrada para extrair horas e minutos
+    if (sscanf(horaInput.c_str(), "%d:%d", &horasConsulta, &minutosConsulta) != 2) {
+        cout << "Formato inválido. Use hh:mm." << endl;
+        continue;
+}
+
+    // Validar a hora usando os métodos da classe DATA
+    if (!date.validarHora(horasConsulta, minutosConsulta)) {
+        cout << "Hora inválida. Por favor, informe uma hora válida." << endl;
+        continue;
+    }
+
+    // Se chegou aqui, a hora está válida
+    break;
+
+} while (true);
+
+// Criar e adicionar a consulta ao vetor de consultas
+CONSULTA consulta;
+consulta.agendarConsulta(codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta);
+consultas.push_back(consulta);
+
 
             break;
         }
