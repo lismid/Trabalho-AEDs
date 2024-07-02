@@ -313,9 +313,7 @@ void menu() {
                 menuConsulta();
                 break;
             case 2:
-                retorno = menuCadastro();
-                if (retorno == 0) 
-                    continuar = false;
+                menuCadastro();
                 break;
             case 3:
                 menuHorarios();
@@ -399,9 +397,14 @@ void menuConsulta() {
 
                 // Criar e adicionar a consulta ao vetor de consultas
                 CONSULTA consulta;
-                //agendarConsulta() está causando um loop infinito
+                //TODO: agendarConsulta() está causando um loop infinito
                 //consulta.agendarConsulta(codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta);
                 consultas.push_back(consulta);
+
+                //TODO: ao consertar o agendarConsulta() remover essa parte
+                cout << "Consulta marcada com sucesso!" << endl;
+                //TODO: ao consertar o agendarConsulta() remover essa parte
+                cout << "Código da consulta: " << consulta.getCodigoConsulta() << endl;
 
                 marcado = false;
                 break;
@@ -439,7 +442,7 @@ void menuConsulta() {
     }
 }
 
-int menuCadastro()
+void menuCadastro()
 {
     vector<PACIENTE> pacientes;
     vector<Medico> medicos;
@@ -635,7 +638,7 @@ int menuCadastro()
         }
         case 11:
             marcado = false;
-            return 1;
+            break;
         default:
             cout << "Opção inválida, por favor tente novamente." << endl;
             break;
@@ -644,7 +647,6 @@ int menuCadastro()
         // Limpar o buffer de entrada
         limparBuffer();
     }
-    return 1;
 }
 
 void menuHorarios()

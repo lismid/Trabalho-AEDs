@@ -127,6 +127,7 @@ void CONSULTA::agendarConsulta(int codigoPaciente, int codigoMedico, int dia, in
     gerarCodigoConsulta();
     salvarConsulta();
     cout << "Consulta agendada com sucesso!" << endl;
+    cout << "Código da consulta: " << codigoConsulta << endl;
 }
 
 

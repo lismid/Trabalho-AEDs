@@ -12,7 +12,7 @@
 using namespace std;
 
 void menuConsulta();
-int menuCadastro();
+void menuCadastro();
 void menuHorarios();
 void menu();
 
