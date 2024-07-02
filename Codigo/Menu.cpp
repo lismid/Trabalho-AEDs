@@ -36,8 +36,7 @@ void listarPacientes(vector<PACIENTE> pacientes) {
 }
 
 // Função para listar todos os médicos
-void listarMedicos(const vector<Medico> &medicos)
-{
+void listarMedicos(const vector<Medico> &medicos) {
     cout << "<------------------------------->" << endl;
     cout << "\tLista de Médicos" << endl;
     cout << "<------------------------------->" << endl;
@@ -289,8 +288,8 @@ void limparBuffer()
     cin.clear();
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
-void menu()
-{
+
+void menu() {
     int escolha;
     bool continuar = true;
 
@@ -347,63 +346,62 @@ void menuConsulta() {
 
         switch (escolha) {
             case 1:
-            { int codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta;
+            { 
+                int codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta;
+                cout << "Informe o código do paciente: ";
+                cin >> codigoPaciente;
 
-    cout << "Informe o código do paciente: ";
-    cin >> codigoPaciente;
+                cout << "Informe o código do médico: ";
+                cin >> codigoMedico;
 
-    cout << "Informe o código do médico: ";
-    cin >> codigoMedico;
+                string dataInput;
+                do {
+                    cout << "Informe a data da consulta (dd/mm/aaaa): ";
+                    cin >> dataInput;
 
-    string dataInput;
-    do {
-        cout << "Informe a data da consulta (dd/mm/aaaa): ";
-        cin >> dataInput;
+                    // Analisar a entrada para extrair dia, mês e ano
+                    if (sscanf(dataInput.c_str(), "%d/%d/%d", &diaConsulta, &mesConsulta, &anoConsulta) != 3) {
+                        cout << "Formato inválido. Use dd/mm/aaaa." << endl;
+                        continue;
+                    }
 
-        // Analisar a entrada para extrair dia, mês e ano
-        if (sscanf(dataInput.c_str(), "%d/%d/%d", &diaConsulta, &mesConsulta, &anoConsulta) != 3) {
-            cout << "Formato inválido. Use dd/mm/aaaa." << endl;
-            continue;
-        }
+                    // Validar a data usando os métodos da classe DATA
+                    if (!date.validarData(diaConsulta, mesConsulta, anoConsulta)) {
+                        cout << "Data inválida. Por favor, informe uma data válida." << endl;
+                        continue;
+                    }
 
-        // Validar a data usando os métodos da classe DATA
-        if (!date.validarData(diaConsulta, mesConsulta, anoConsulta)) {
-            cout << "Data inválida. Por favor, informe uma data válida." << endl;
-            continue;
-        }
+                    // Se chegou aqui, a data está válida
+                    break;
 
-        // Se chegou aqui, a data está válida
-        break;
+                } while (true);
 
-    } while (true);
+                string horaInput;
+                do {
+                    cout << "Informe a hora da consulta (hh:mm): ";
+                    cin >> horaInput;
 
-    string horaInput;
-    do {
-        cout << "Informe a hora da consulta (hh:mm): ";
-        cin >> horaInput;
+                    // Analisar a entrada para extrair horas e minutos
+                    if (sscanf(horaInput.c_str(), "%d:%d", &horasConsulta, &minutosConsulta) != 2) {
+                        cout << "Formato inválido. Use hh:mm." << endl;
+                        continue;
+                    }
 
-        // Analisar a entrada para extrair horas e minutos
-        if (sscanf(horaInput.c_str(), "%d:%d", &horasConsulta, &minutosConsulta) != 2) {
-            cout << "Formato inválido. Use hh:mm." << endl;
-            continue;
-        }
+                    // Validar a hora usando os métodos da classe DATA
+                    if (!date.validarHora(horasConsulta, minutosConsulta)) {
+                        cout << "Hora inválida. Por favor, informe uma hora válida." << endl;
+                        continue;
+                    }
 
-        // Validar a hora usando os métodos da classe DATA
-        if (!date.validarHora(horasConsulta, minutosConsulta)) {
-            cout << "Hora inválida. Por favor, informe uma hora válida." << endl;
-            continue;
-        }
+                    // Se chegou aqui, a hora está válida
+                    break;
 
-        // Se chegou aqui, a hora está válida
-        break;
+                } while (true);
 
-    } while (true);
-
-    // Criar e adicionar a consulta ao vetor de consultas
-    CONSULTA consulta;
-    consulta.agendarConsulta(codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta);
-    consultas.push_back(consulta);
-
+                // Criar e adicionar a consulta ao vetor de consultas
+                CONSULTA consulta;
+                consulta.agendarConsulta(codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta);
+                consultas.push_back(consulta);
 
                 break;
             }
