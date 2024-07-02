@@ -1,103 +1,83 @@
+
+#include "../Classes/Medico.hpp"
 #include <iostream>
 #include <fstream>
-#include <vector> //essa é a biblioteca pra usar vetor, que a gente ta usando pra alocar os médicos de forma dinâmica 
-#include <sstream> //essa é pra manipular string tipo arquivo, com entrada (istream) e saida (ostream)
+#include <vector>
 
-using namespace std;
+using namespace std; 
 
-class Medico {
-private:
-    int codigo;
-    string nome;
-    string telefone;
-    string especialidade;
-
-public:
-    // Construtor
-    Medico(int codigo, const string& nome, const string& telefone, const string& especialidade)
-        : codigo(codigo), nome(nome), telefone(telefone), especialidade(especialidade) {}
-
-    // Método para cadastrar médico
-    void cadastrar() {
-        ofstream arquivoMedicos("medicos.txt", ios::app);
-
-        if (!arquivoMedicos.is_open()) {
-            cerr << "Erro ao abrir o arquivo de medicos." << endl;
-            return;
-        }
-
-        // Verificar se já existe um médico com o mesmo código
-        ifstream arquivoConsulta("medicos.txt");
-        string linha;
-        while (getline(arquivoConsulta, linha)) {
-            stringstream ss(linha);
-            int codigoExistente;
-            ss >> codigoExistente;  // Lendo o código do médico existente
-            if (codigoExistente == codigo) {
-                cout << "Erro: Ja existe um medico cadastrado com o codigo " << codigo << endl;
-                arquivoMedicos.close();
-                return;
-            }
-        }
-        arquivoConsulta.close();
-
-        // Escrever os dados do médico no arquivo
-        arquivoMedicos << codigo << " " << nome << " " << telefone << " " << especialidade << endl;
-
-        arquivoMedicos.close();
-
-        cout << "Medico cadastrado com sucesso!" << endl;
-    }
-
-    int getCodigo() const { return codigo; }
-    const string& getNome() const { return nome; }
-    const string& getTelefone() const { return telefone; }
-    const string& getEspecialidade() const { return especialidade; }
-};
-
-// Função para ler médicos do arquivo
 vector<Medico> lerMedicos() {
     vector<Medico> medicos;
-
-    ifstream arquivoMedicos("medicos.txt");
-
-    if (!arquivoMedicos.is_open()) {
-        cerr << "Erro ao abrir o arquivo de medicos." << endl;
+    ifstream arquivo("medicos.txt");
+    if (!arquivo.is_open()) {
+        cerr << "Erro ao abrir o arquivo de médicos." << endl;
         return medicos;
     }
 
-    // Ler cada linha do arquivo e criar objetos Medico
-    string linha;
-    while (getline(arquivoMedicos, linha)) {
-        stringstream ss(linha); //Usando stringstream pq ela meio que separa os dados usando espaços em branco como delimitadores por padrão
-        int codigo;
-        string nome, telefone, especialidade;
-        ss >> codigo >> nome >> telefone >> especialidade; //Ai aq usando ss os dados sao separados direitinho
-        medicos.push_back(Medico(codigo, nome, telefone, especialidade));
+    int codigo;
+    string nome, especialidade;
+    while (arquivo >> codigo >> nome >> especialidade) {
+        medicos.emplace_back(codigo, nome, especialidade);
     }
 
-    arquivoMedicos.close();
-
+    arquivo.close();
     return medicos;
 }
+void Medico::setEspecialidade(const string& especialidade) {
+    this->especialidade = especialidade;
+}
 
-// Função main para testar o cadastro de médico
-int main() {
-    // Exemplo de cadastro de médico
-    Medico medico1(1, "Dr. Joao", "(31) 98765-4321", "Cardiologia");
-    Medico medico2(2, "Dra. Maria", "(31) 99876-5432", "Dermatologia");
-
-    medico1.cadastrar();
-    medico2.cadastrar();
-
-    // Ler médicos cadastrados
-    vector<Medico> listaMedicos = lerMedicos();
-
-    // Exibir lista de médicos cadastrados
-    cout << "Medicos cadastrados:" << endl;
-    for (const Medico& medico : listaMedicos) {
-        cout << "Codigo: " << medico.getCodigo() << ", Nome: " << medico.getNome() << ", Telefone: " << medico.getTelefone() << ", Especialidade: " << medico.getEspecialidade() << endl;
+void salvarMedicos(const vector<Medico>& medicos) {
+    ofstream arquivo("medicos.txt");
+    if (!arquivo.is_open()) {
+        cerr << "Erro ao abrir o arquivo de médicos para escrita." << endl;
+        return;
     }
 
-    return 0;
+    for (const auto& medico : medicos) {
+        arquivo << medico.getCodigo() << " "
+                << medico.getNome() << " "
+                << medico.getEspecialidade() << endl;
+    }
+
+    arquivo.close();
 }
+void Medico::setNome(const string& nome) {
+    this->nome = nome;
+}
+
+void cadastrarMedico() {
+    string nome, especialidade;
+
+    // Verificar a lista de médicos existentes para determinar o próximo código
+    vector<Medico> medicos = lerMedicos();
+    int proximoCodigo = medicos.empty() ? 1 : medicos.back().getCodigo() + 1;
+
+    cout << "Informe o nome do médico: ";
+    cin >> nome;
+    cout << "Informe a especialidade do médico: ";
+    cin >> especialidade;
+    
+
+    // Criar um novo objeto de Medico
+    Medico novoMedico(proximoCodigo, nome, especialidade);
+    novoMedico.cadastrar();
+
+    // Adicionar o novo médico ao vetor
+    medicos.push_back(novoMedico);
+
+    // Salvar os médicos de volta no arquivo
+    salvarMedicos(medicos);
+
+    cout << "Médico cadastrado com sucesso!" << endl;
+
+}
+const string& Medico::getEspecialidade() const {
+    return especialidade;
+}
+void Medico::cadastrar() {
+    cout << "Cadastrando médico: " << nome << " com especialidade: " << especialidade << endl;
+}
+
+
+
