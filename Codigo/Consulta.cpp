@@ -76,17 +76,8 @@ CONSULTA CONSULTA::agendarConsulta(int codigoPaciente, int codigoMedico, int dia
         return *this;
     }
 
-    // Escrever os dados da consulta no arquivo
-    arquivoConsultas << codigoConsulta << " " << codigoPaciente << " " 
-                     << codigoMedico << " " << dia << " " << mes << " " << ano << " "
-                     << horas << " " << minutos << std::endl;
-    
     // Gerar um código de consulta único
     gerarCodigoConsulta();
-
-    // Fechar o arquivo
-    arquivoConsultas.close();
-
     // Preencher os dados do objeto consulta
     codigoPaciente = codigoPaciente;
     codigoMedico = codigoMedico;
@@ -95,6 +86,16 @@ CONSULTA CONSULTA::agendarConsulta(int codigoPaciente, int codigoMedico, int dia
     ano = ano;
     horas = horas;
     minutos = minutos;
+
+    // Escrever os dados da consulta no arquivo
+    arquivoConsultas << codigoConsulta << " " << codigoPaciente << " " 
+                     << codigoMedico << " " << dia << " " << mes << " " << ano << " "
+                     << horas << " " << minutos << std::endl;
+    
+
+    // Fechar o arquivo
+    arquivoConsultas.close();
+
 
     std::cout << "Consulta agendada com sucesso. Código da consulta: " << codigoConsulta << std::endl;
     return *this;

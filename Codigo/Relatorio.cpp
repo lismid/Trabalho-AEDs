@@ -1,5 +1,6 @@
 #include "../Classes/Paciente.hpp"
 #include "../Classes/Relatorio.hpp"
+#include <cerrno>
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -12,6 +13,7 @@ Relatorio::Relatorio() {}
 Relatorio::~Relatorio() {}
 
 vector<CONSULTA> Relatorio::lerConsultas() const {
+    
     vector<CONSULTA> consultas;
     ifstream arquivo("consultas.txt");
     if (!arquivo.is_open()) {
@@ -116,7 +118,6 @@ void Relatorio::consultasPorPaciente(const string& nomeOuCodigoPaciente) const {
 }
 
 void Relatorio::consultasPorMedico(const string& nomeOuCodigoMedico) const {
-
     vector<CONSULTA> consultas = lerConsultas();
     vector<Medico> medicos = lerMedicos();
 
@@ -124,19 +125,26 @@ void Relatorio::consultasPorMedico(const string& nomeOuCodigoMedico) const {
     try {
         codigoMedico = stoi(nomeOuCodigoMedico);
     } catch (...) {
-        // nomeOuCodigoMedico is not a number, treat it as a name
+        cerr << "Erro ao converter codigo do medico para inteiro." << endl;
     }
 
-    cout << "Consultas do medico " << nomeOuCodigoMedico << " " << endl;
-    for (const auto& medico : medicos) {
-        if (medico.getCodigo() == codigoMedico || medico.getNome() == nomeOuCodigoMedico) {
-            for (const auto& consulta : consultas) {
-                if (consulta.getCodigoMedico() == medico.getCodigo()) {
-                    cout << "Consulta de codigo: " << consulta.getCodigoConsulta() << " em " << consulta.getDataConsulta().getVerData() << endl;
-                }
+    auto it = std::find_if(medicos.begin(), medicos.end(), [&](const Medico& medico) {
+        return medico.getCodigo() == codigoMedico || medico.getNome() == nomeOuCodigoMedico;
+    });
+
+    if (it != medicos.end()) {
+        cout << "Consultas do medico " << nomeOuCodigoMedico << ":\n";
+        bool encontrouConsulta = false;
+        for (const auto& consulta : consultas) {
+            if (consulta.getCodigoMedico() == it->getCodigo()) {
+                cout << "Consulta de codigo: " << consulta.getCodigoConsulta() << " em " << consulta.getDataConsulta().getVerData() << endl;
+                encontrouConsulta = true;
             }
-            return; 
         }
+        if (!encontrouConsulta) {
+            cout << "Nenhuma consulta encontrada para este médico." << endl;
+        }
+    } else {
+        cout << "Medico nao encontrado." << endl;
     }
-    cout << "Medico nao encontrado." << endl;
 }
