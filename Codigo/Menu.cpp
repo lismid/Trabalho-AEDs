@@ -9,6 +9,7 @@
 #include "../Classes/Paciente.hpp"
 #include "../Classes/Medico.hpp"
 #include "../Classes/Data.hpp"
+#include "../Codigo/CadastrarMedico.cpp"
 using namespace std;
 
 void listarPacientes(vector<PACIENTE> pacientes) {
@@ -637,6 +638,8 @@ void menuCadastro()
             break;
         }
         case 11:
+
+            salvarMedicos(medicos); 
             marcado = false;
             break;
         default:
@@ -650,8 +653,9 @@ void menuCadastro()
 }
 
 void menuHorarios()
-{
-    Relatorio relatorio; // Instancia um objeto da classe Relatorio para usar seus métodos
+{   
+    // Instancia um objeto da classe Relatorio para usar seus métodos
+    Relatorio relatorio; 
 
     int escolha3;
     bool marcado3 = true;
@@ -706,10 +710,10 @@ void menuHorarios()
 
 // Função extra:
 
-int EscolherUnidade(){
+/*int EscolherUnidade(){
     int unidade;
     cout << "Unidades da clinica:" << endl << "1. Unidade Floresta" << "2. Unidade Savassi" << endl << "3. Unidade Santa Tereza" << endl;
     cout << "Entre com o numero da unidade: " << endl;
     cin >> unidade;
     return unidade;
-}
+}*/
