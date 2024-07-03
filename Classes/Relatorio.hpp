@@ -23,7 +23,7 @@ public:
 private:
     vector<CONSULTA> lerConsultas() const;
     vector<Medico> lerMedicos() const;
-    vector<PACIENTE> lerPacientes() const;
+    vector<Paciente> lerPacientes() const;
 };
 
 #endif // RELATORIO_HPP

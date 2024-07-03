@@ -10,11 +10,11 @@ using namespace std;
 
 CONSULTA::CONSULTA() : codigoConsulta(0), medico(nullptr), paciente(nullptr) {}
 
-CONSULTA::CONSULTA(int codigoConsulta, const Medico &medico, const PACIENTE &paciente, const DATA &dataConsulta)
+CONSULTA::CONSULTA(int codigoConsulta, const Medico &medico, const Paciente &paciente, const DATA &dataConsulta)
     : codigoConsulta(codigoConsulta), dataConsulta(dataConsulta)
 {
     this->medico = new Medico(medico);
-    this->paciente = new PACIENTE(paciente);
+    this->paciente = new Paciente(paciente);
 }
 
 CONSULTA::~CONSULTA()
@@ -120,7 +120,7 @@ void CONSULTA::agendarConsulta(int codigoPaciente, int codigoMedico, int dia, in
 
     // Aloca novos objetos
     medico = new Medico(codigoMedico, "", ""); 
-    paciente = new PACIENTE("", 0, dataConsulta, "", 0, "", "", 0, "", "", codigoPaciente);
+    paciente = new Paciente("", 0, dataConsulta, "", 0, "", "", 0, "", "", codigoPaciente);
 
     // Outras operações de agendamento, se necessário
     dataConsulta = dataConsulta; // Certifique-se de que essa linha é necessária ou ajuste conforme necessário

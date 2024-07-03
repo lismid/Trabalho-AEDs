@@ -1,4 +1,4 @@
-
+#include "../Classes/Paciente.hpp"
 #include "../Classes/Relatorio.hpp"
 #include <iostream>
 #include <fstream>
@@ -28,7 +28,7 @@ vector<CONSULTA> Relatorio::lerConsultas() const {
                    >> dia >> mes >> ano >> horas >> minutos) {
         Medico medico(codigoMedico, nomeMedico, especialidadeMedico);
         DATA dataConsulta(dia, mes, ano, horas, minutos);
-        PACIENTE paciente(nomePaciente, telefonePaciente, dataConsulta, "", 0, "", "", 0, "", "", codigoPaciente);
+        Paciente paciente(nomePaciente, telefonePaciente, dataConsulta, "", 0, "", "", 0, "", "", codigoPaciente);
         CONSULTA consulta(codigoConsulta, medico, paciente, dataConsulta);
         consultas.push_back(consulta);
     }
@@ -55,8 +55,8 @@ vector<Medico> Relatorio::lerMedicos() const {
     return medicos;
 }
 
-vector<PACIENTE> Relatorio::lerPacientes() const {
-    vector<PACIENTE> pacientes;
+vector<Paciente> Relatorio::lerPacientes() const {
+    vector<Paciente> pacientes;
     ifstream arquivo("pacientes.txt");
     if (!arquivo.is_open()) {
         cerr << "Erro ao abrir o arquivo de pacientes." << endl;
@@ -70,7 +70,7 @@ vector<PACIENTE> Relatorio::lerPacientes() const {
                    >> logradouro >> numero >> bairro >> complemento >> cep 
                    >> cidade >> estado >> codigo) {
         DATA dataNascimento(dia, mes, ano, horas, minutos);
-        PACIENTE paciente(nome, telefone, dataNascimento, logradouro, numero, bairro, complemento, cep, cidade, estado, codigo);
+        Paciente paciente(nome, telefone, dataNascimento, logradouro, numero, bairro, complemento, cep, cidade, estado, codigo);
         pacientes.push_back(paciente);
     }
 
@@ -92,7 +92,7 @@ void Relatorio::consultasPorData(const DATA& data) const {
 
 void Relatorio::consultasPorPaciente(const string& nomeOuCodigoPaciente) const {
     vector<CONSULTA> consultas = lerConsultas();
-    vector<PACIENTE> pacientes = lerPacientes();
+    vector<Paciente> pacientes = lerPacientes();
 
     int codigoPaciente = -1;
     try {

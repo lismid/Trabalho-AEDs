@@ -6,13 +6,11 @@
 #include <algorithm>
 #include "../Classes/Relatorio.hpp"
 #include "../Classes/Menu.hpp"
-#include "../Classes/Paciente.hpp"
-#include "../Classes/Medico.hpp"
 #include "../Classes/Data.hpp"
-#include "../Codigo/CadastrarMedico.cpp"
+#include "../Classes/Medico.hpp"
 using namespace std;
 
-void listarPacientes(vector<PACIENTE> pacientes) {
+void listarPacientes(vector<Paciente> pacientes) {
     cout << "<------------------------------->" << endl;
     cout << "\tLista de Pacientes" << endl;
     cout << "<------------------------------->" << endl;
@@ -59,7 +57,7 @@ void listarMedicos(const vector<Medico> &medicos) {
 }
 
 // Função para buscar paciente por nome
-void buscarPacientenome(const vector<PACIENTE> &pacientes, const string &nome)
+void buscarPacientenome(const vector<Paciente> &pacientes, const string &nome)
 {
     bool encontrado = false;
     for (const auto &paciente : pacientes)
@@ -88,7 +86,7 @@ void buscarPacientenome(const vector<PACIENTE> &pacientes, const string &nome)
 }
 
 // Função para buscar paciente por código
-void buscarPacientecodigo(const vector<PACIENTE> &pacientes, int codigo) {
+void buscarPacientecodigo(const vector<Paciente> &pacientes, int codigo) {
     bool encontrado = false;
     for (const auto &paciente : pacientes)
     {
@@ -160,7 +158,7 @@ void buscarMedicocodigo(const vector<Medico> &medicos, int codigo)
 }
 
 // Função para editar paciente por código
-void editarPaciente(vector<PACIENTE> &pacientes, int codigo)
+void editarPaciente(vector<Paciente> &pacientes, int codigo)
 {
     bool encontrado = false;
     for (auto &paciente : pacientes)
@@ -244,7 +242,7 @@ void editarMedico(vector<Medico> &medicos, int codigo)
 }
 
 // Função para remover paciente por código
-void removerPaciente(vector<PACIENTE> &pacientes, int codigo)
+void removerPaciente(vector<Paciente> &pacientes, int codigo)
 {
     auto it = pacientes.begin();
     while (it != pacientes.end())
@@ -445,7 +443,7 @@ void menuConsulta() {
 
 void menuCadastro()
 {
-    vector<PACIENTE> pacientes;
+    vector<Paciente> pacientes;
     vector<Medico> medicos;
     bool marcado = true;
     while (marcado)
@@ -512,7 +510,7 @@ void menuCadastro()
             getline(cin, estado);
 
             // Criar um novo objeto de PACIENTE
-            PACIENTE novoPaciente(nome, telefone, DATA(dia, mes, ano), logradouro, numero, bairro,
+            Paciente novoPaciente(nome, telefone, DATA(dia, mes, ano), logradouro, numero, bairro,
                                   complemento, cep, cidade, estado, pacientes.size() + 1);
             // Adicionar o paciente ao vetor
             pacientes.push_back(novoPaciente);
@@ -638,8 +636,8 @@ void menuCadastro()
             break;
         }
         case 11:
-
-            salvarMedicos(medicos); 
+            Paciente::salvarPacientes(pacientes);
+            Medico::salvarMedicos(medicos); 
             marcado = false;
             break;
         default:
@@ -707,13 +705,3 @@ void menuHorarios()
         }
     }
 }
-
-// Função extra:
-
-/*int EscolherUnidade(){
-    int unidade;
-    cout << "Unidades da clinica:" << endl << "1. Unidade Floresta" << "2. Unidade Savassi" << endl << "3. Unidade Santa Tereza" << endl;
-    cout << "Entre com o numero da unidade: " << endl;
-    cin >> unidade;
-    return unidade;
-}*/

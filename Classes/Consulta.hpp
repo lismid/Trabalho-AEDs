@@ -1,21 +1,22 @@
 #ifndef CONSULTA_HPP
 #define CONSULTA_HPP
+#pragma once
 
 #include "Medico.hpp"
 #include "Paciente.hpp"
 #include "Data.hpp"
 #include <vector>
-#pragma once
+
 class CONSULTA {
 private:
     int codigoConsulta;
     DATA dataConsulta;
     Medico *medico;
-    PACIENTE *paciente;
+    Paciente *paciente;
 
 public:
     CONSULTA();
-    CONSULTA(int codigoConsulta, const Medico& medico, const PACIENTE& paciente, const DATA& dataConsulta);
+    CONSULTA(int codigoConsulta, const Medico& medico, const Paciente& paciente, const DATA& dataConsulta);
     ~CONSULTA();
     
     void agendarConsulta(int codigoPaciente, int codigoMedico, int dia, int mes, int ano, int horas, int minutos);
