@@ -691,7 +691,7 @@ void menuHorarios()
             int dia, mes, ano;
             cout << "Informe o dia, mes e ano da consulta (DD MM AAAA): ";
             cin >> dia >> mes >> ano;
-            DATA dataConsulta(dia, mes, ano, 0, 0); // Considera 00:00 como horário para consulta por dia
+            DATA dataConsulta(dia, mes, ano, 0, 0); 
             relatorio.consultasPorData(dataConsulta);
             break;
         }

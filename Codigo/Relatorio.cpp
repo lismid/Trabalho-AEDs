@@ -116,6 +116,7 @@ void Relatorio::consultasPorPaciente(const string& nomeOuCodigoPaciente) const {
 }
 
 void Relatorio::consultasPorMedico(const string& nomeOuCodigoMedico) const {
+
     vector<CONSULTA> consultas = lerConsultas();
     vector<Medico> medicos = lerMedicos();
 
@@ -134,7 +135,7 @@ void Relatorio::consultasPorMedico(const string& nomeOuCodigoMedico) const {
                     cout << "Consulta de codigo: " << consulta.getCodigoConsulta() << " em " << consulta.getDataConsulta().getVerData() << endl;
                 }
             }
-            return; // Doctor found, exit loop
+            return; 
         }
     }
     cout << "Medico nao encontrado." << endl;
