@@ -1,6 +1,7 @@
 #include "../Classes/Consulta.hpp"
 #include <iostream>
 #include <fstream>
+#include <system_error>
 #include <vector>
 #include <algorithm>
 #include <sstream>
@@ -67,12 +68,12 @@ bool validarHora(const string &horaInput)
     return true;
 }
 
-void CONSULTA::agendarConsulta(int codigoPaciente, int codigoMedico, int dia, int mes, int ano, int horas, int minutos) {
+CONSULTA CONSULTA::agendarConsulta(int codigoPaciente, int codigoMedico, int dia, int mes, int ano, int horas, int minutos) {
     // Abrir arquivo de consultas em modo de adição
     std::ofstream arquivoConsultas("consultas.txt", std::ios::app);
     if (!arquivoConsultas) {
         std::cerr << "Erro ao abrir o arquivo de consultas." << std::endl;
-        return;
+        return *this;
     }
 
     // Escrever os dados da consulta no arquivo
@@ -96,6 +97,7 @@ void CONSULTA::agendarConsulta(int codigoPaciente, int codigoMedico, int dia, in
     minutos = minutos;
 
     std::cout << "Consulta agendada com sucesso. Código da consulta: " << codigoConsulta << std::endl;
+    return *this;
 }
 
 int CONSULTA::getCodigoMedico() const

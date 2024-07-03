@@ -127,7 +127,7 @@ void Relatorio::consultasPorMedico(const string& nomeOuCodigoMedico) const {
         // nomeOuCodigoMedico is not a number, treat it as a name
     }
 
-    cout << "Consultas do medico " << nomeOuCodigoMedico << ":" << endl;
+    cout << "Consultas do medico " << nomeOuCodigoMedico << " " << endl;
     for (const auto& medico : medicos) {
         if (medico.getCodigo() == codigoMedico || medico.getNome() == nomeOuCodigoMedico) {
             for (const auto& consulta : consultas) {

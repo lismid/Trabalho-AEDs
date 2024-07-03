@@ -19,7 +19,7 @@ public:
     CONSULTA(int codigoConsulta, const Medico& medico, const Paciente& paciente, const DATA& dataConsulta);
     ~CONSULTA();
     
-    void agendarConsulta(int codigoPaciente, int codigoMedico, int dia, int mes, int ano, int horas, int minutos);
+    CONSULTA agendarConsulta(int codigoPaciente, int codigoMedico, int dia, int mes, int ano, int horas, int minutos);
     int getCodigoMedico() const;
     int getCodigoPaciente() const;
     int getCodigoConsulta() const;

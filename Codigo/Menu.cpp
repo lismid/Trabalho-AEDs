@@ -396,7 +396,7 @@ void menuConsulta() {
 
                 // Criar e adicionar a consulta ao vetor de consultas
                 CONSULTA consulta;
-                consulta.agendarConsulta(codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta);
+                consulta = consulta.agendarConsulta(codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta);
                 consultas.push_back(consulta);
 
                 //TODO: ao consertar o agendarConsulta() remover essa parte
