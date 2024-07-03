@@ -117,6 +117,7 @@ void Relatorio::consultasPorPaciente(const string& nomeOuCodigoPaciente) const {
     cout << "Paciente nao encontrado." << endl;
 }
 
+//TODO: corrigir, está gerando um segmentation fault, está acessando região de memória inválida infelizmente
 void Relatorio::consultasPorMedico(const string& nomeOuCodigoMedico) const {
     vector<CONSULTA> consultas = lerConsultas();
     vector<Medico> medicos = lerMedicos();
@@ -132,6 +133,7 @@ void Relatorio::consultasPorMedico(const string& nomeOuCodigoMedico) const {
         return medico.getCodigo() == codigoMedico || medico.getNome() == nomeOuCodigoMedico;
     });
 
+    // TODO: cheque aqui, provávelmente está acessando região de memória inválida
     if (it != medicos.end()) {
         cout << "Consultas do medico " << nomeOuCodigoMedico << ":\n";
         bool encontrouConsulta = false;
