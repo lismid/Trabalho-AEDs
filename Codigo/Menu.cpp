@@ -396,8 +396,7 @@ void menuConsulta() {
 
                 // Criar e adicionar a consulta ao vetor de consultas
                 CONSULTA consulta;
-                //TODO: agendarConsulta() está causando um loop infinito
-                //consulta.agendarConsulta(codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta);
+                consulta.agendarConsulta(codigoPaciente, codigoMedico, diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta);
                 consultas.push_back(consulta);
 
                 //TODO: ao consertar o agendarConsulta() remover essa parte

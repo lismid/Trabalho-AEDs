@@ -67,70 +67,36 @@ bool validarHora(const string &horaInput)
     return true;
 }
 
-//Tem um loop infinito
 void CONSULTA::agendarConsulta(int codigoPaciente, int codigoMedico, int dia, int mes, int ano, int horas, int minutos) {
+    // Abrir arquivo de consultas em modo de adição
+    std::ofstream arquivoConsultas("consultas.txt", std::ios::app);
+    if (!arquivoConsultas) {
+        std::cerr << "Erro ao abrir o arquivo de consultas." << std::endl;
+        return;
+    }
+
+    // Escrever os dados da consulta no arquivo
+    arquivoConsultas << codigoConsulta << " " << codigoPaciente << " " 
+                     << codigoMedico << " " << dia << " " << mes << " " << ano << " "
+                     << horas << " " << minutos << std::endl;
     
-    string dataInput;
-    do {
-        cout << "Informe a data da consulta (dd/mm/aaaa): ";
-        cin >> dataInput;
-
-        //Se a data for válida, sai do loop
-        if(validarData(dataInput))
-            break;
-    } while (true);
-
-    int diaConsulta, mesConsulta, anoConsulta;
-    try {
-        diaConsulta = stoi(dataInput.substr(0, 2));
-        mesConsulta = stoi(dataInput.substr(3, 2));
-        anoConsulta = stoi(dataInput.substr(6, 4));
-    } catch (const std::invalid_argument& e) {
-        cout << "Erro ao converter data. Consulta nao agendada." << endl;
-        return;
-    }
-
-    string horaInput;
-    do {
-        cout << "Informe a hora da consulta (hh:mm): ";
-        cin >> horaInput;
-
-        //Se a hora for válida, sai do loop
-        if(validarHora(horaInput))
-            break;
-    } while (true);
-
-    int horasConsulta, minutosConsulta;
-    try {
-        horasConsulta = stoi(horaInput.substr(0, 2));
-        minutosConsulta = stoi(horaInput.substr(3, 2));
-    } catch (const std::invalid_argument& e) {
-        cout << "Erro ao converter hora. Consulta nao agendada." << endl;
-        return;
-    }
-
-    DATA dataConsulta(diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta);
-    if (!dataConsulta.validarData(dataConsulta.getDia(), dataConsulta.getMes(), dataConsulta.getAno())) {
-        cout << "Data invalida. Consulta nao agendada." << endl;
-        return;
-    }
-
-    // Libera memória dos objetos anteriores, se existirem
-    cancelarConsulta();
-
-    // Aloca novos objetos
-    medico = new Medico(codigoMedico, "", ""); 
-    paciente = new Paciente("", 0, dataConsulta, "", 0, "", "", 0, "", "", codigoPaciente);
-
-    // Outras operações de agendamento, se necessário
-    dataConsulta = dataConsulta; // Certifique-se de que essa linha é necessária ou ajuste conforme necessário
+    // Gerar um código de consulta único
     gerarCodigoConsulta();
-    salvarConsulta();
-    cout << "Consulta agendada com sucesso!" << endl;
-    cout << "Codigo da consulta: " << codigoConsulta << endl;
+
+    // Fechar o arquivo
+    arquivoConsultas.close();
+
+    // Preencher os dados do objeto consulta
+    codigoPaciente = codigoPaciente;
+    codigoMedico = codigoMedico;
+    dia = dia;
+    mes = mes;
+    ano = ano;
+    horas = horas;
+    minutos = minutos;
+
+    std::cout << "Consulta agendada com sucesso. Código da consulta: " << codigoConsulta << std::endl;
 }
-
-
 
 int CONSULTA::getCodigoMedico() const
 {
@@ -162,8 +128,7 @@ void CONSULTA::cancelarConsulta()
     cout << "Consulta cancelada!" << endl;
 }
 
-void CONSULTA::gerarCodigoConsulta()
-{
+void CONSULTA::gerarCodigoConsulta() {
     int maiorCodigo = 0;
 
     ifstream arquivo("consultas.txt");
@@ -197,8 +162,8 @@ bool CONSULTA::podeAtenderMaisUmaConsulta(const vector<CONSULTA> &consultas, int
     return consultasNoDia < 2;
 }
 
-void CONSULTA::salvarConsulta() const
-{
+void CONSULTA::salvarConsulta() const {
+    // Se o medico ou paciente não existirem, salva -1 e informações padrão
     ofstream arquivo("consultas.txt", ios::app);
     if (!arquivo.is_open())
     {
@@ -206,25 +171,22 @@ void CONSULTA::salvarConsulta() const
         return;
     }
 
+    //Salva o código de consulta no arquivo
     arquivo << codigoConsulta << " ";
-    if (medico)
-    {
+    if (medico) {
         arquivo << medico->getCodigo() << " " << medico->getNome() << " " << medico->getEspecialidade() << " ";
-    }
-    else
-    {
+    } else {
         arquivo << "-1 Nao Informado Nao Informado ";
     }
 
-    if (paciente)
-    {
+    // Salva o código do paciente no arquivo
+    if (paciente) {
         arquivo << paciente->getCodigoPaciente() << " " << paciente->getNome() << " " << paciente->getTelefone() << " ";
-    }
-    else
-    {
+    } else {
         arquivo << "-1 Nao Informado 0 ";
     }
 
+    // Salva a data da consulta no arquivo
     arquivo << dataConsulta.getDia() << " " << dataConsulta.getMes() << " " << dataConsulta.getAno() << " "
             << dataConsulta.getHoras() << " " << dataConsulta.getMinutos() << endl;
 
