@@ -86,7 +86,7 @@ void CONSULTA::agendarConsulta(int codigoPaciente, int codigoMedico, int dia, in
         mesConsulta = stoi(dataInput.substr(3, 2));
         anoConsulta = stoi(dataInput.substr(6, 4));
     } catch (const std::invalid_argument& e) {
-        cout << "Erro ao converter data. Consulta não agendada." << endl;
+        cout << "Erro ao converter data. Consulta nao agendada." << endl;
         return;
     }
 
@@ -105,13 +105,13 @@ void CONSULTA::agendarConsulta(int codigoPaciente, int codigoMedico, int dia, in
         horasConsulta = stoi(horaInput.substr(0, 2));
         minutosConsulta = stoi(horaInput.substr(3, 2));
     } catch (const std::invalid_argument& e) {
-        cout << "Erro ao converter hora. Consulta não agendada." << endl;
+        cout << "Erro ao converter hora. Consulta nao agendada." << endl;
         return;
     }
 
     DATA dataConsulta(diaConsulta, mesConsulta, anoConsulta, horasConsulta, minutosConsulta);
     if (!dataConsulta.validarData(dataConsulta.getDia(), dataConsulta.getMes(), dataConsulta.getAno())) {
-        cout << "Data inválida. Consulta não agendada." << endl;
+        cout << "Data invalida. Consulta nao agendada." << endl;
         return;
     }
 
@@ -127,7 +127,7 @@ void CONSULTA::agendarConsulta(int codigoPaciente, int codigoMedico, int dia, in
     gerarCodigoConsulta();
     salvarConsulta();
     cout << "Consulta agendada com sucesso!" << endl;
-    cout << "Código da consulta: " << codigoConsulta << endl;
+    cout << "Codigo da consulta: " << codigoConsulta << endl;
 }
 
 

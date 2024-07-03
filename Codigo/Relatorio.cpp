@@ -41,7 +41,7 @@ vector<Medico> Relatorio::lerMedicos() const {
     vector<Medico> medicos;
     ifstream arquivo("medicos.txt");
     if (!arquivo.is_open()) {
-        cerr << "Erro ao abrir o arquivo de médicos." << endl;
+        cerr << "Erro ao abrir o arquivo de medicos." << endl;
         return medicos;
     }
 
@@ -85,7 +85,7 @@ void Relatorio::consultasPorData(const DATA& data) const {
         if (consulta.getDataConsulta().getDia() == data.getDia() &&
             consulta.getDataConsulta().getMes() == data.getMes() &&
             consulta.getDataConsulta().getAno() == data.getAno()) {
-            cout << "Consulta de código: " << consulta.getCodigoConsulta() << endl;
+            cout << "Consulta de codigo: " << consulta.getCodigoConsulta() << endl;
         }
     }
 }
@@ -106,13 +106,13 @@ void Relatorio::consultasPorPaciente(const string& nomeOuCodigoPaciente) const {
         if (paciente.getCodigoPaciente() == codigoPaciente || paciente.getNome() == nomeOuCodigoPaciente) {
             for (const auto& consulta : consultas) {
                 if (consulta.getCodigoPaciente() == paciente.getCodigoPaciente()) {
-                    cout << "Consulta de código: " << consulta.getCodigoConsulta() << " em " << consulta.getDataConsulta().getVerData() << endl;
+                    cout << "Consulta de codigo: " << consulta.getCodigoConsulta() << " em " << consulta.getDataConsulta().getVerData() << endl;
                 }
             }
             return; // Patient found, exit loop
         }
     }
-    cout << "Paciente não encontrado." << endl;
+    cout << "Paciente nao encontrado." << endl;
 }
 
 void Relatorio::consultasPorMedico(const string& nomeOuCodigoMedico) const {
@@ -126,16 +126,16 @@ void Relatorio::consultasPorMedico(const string& nomeOuCodigoMedico) const {
         // nomeOuCodigoMedico is not a number, treat it as a name
     }
 
-    cout << "Consultas do médico " << nomeOuCodigoMedico << ":" << endl;
+    cout << "Consultas do medico " << nomeOuCodigoMedico << ":" << endl;
     for (const auto& medico : medicos) {
         if (medico.getCodigo() == codigoMedico || medico.getNome() == nomeOuCodigoMedico) {
             for (const auto& consulta : consultas) {
                 if (consulta.getCodigoMedico() == medico.getCodigo()) {
-                    cout << "Consulta de código: " << consulta.getCodigoConsulta() << " em " << consulta.getDataConsulta().getVerData() << endl;
+                    cout << "Consulta de codigo: " << consulta.getCodigoConsulta() << " em " << consulta.getDataConsulta().getVerData() << endl;
                 }
             }
             return; // Doctor found, exit loop
         }
     }
-    cout << "Médico não encontrado." << endl;
+    cout << "Medico nao encontrado." << endl;
 }
