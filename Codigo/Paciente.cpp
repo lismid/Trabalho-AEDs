@@ -1,10 +1,8 @@
-
 #include "../Classes/Paciente.hpp"
 #include <iostream>
 #include <fstream>
 #include <vector>
 using namespace std;
-
 
 // Getters
 string PACIENTE::getNome() const {
@@ -112,7 +110,7 @@ void PACIENTE::adicionarPaciente(const string &nome, long int telefone, const DA
     // Implementação da adição de paciente
 }
 
-void salvarPacientes(const vector<Paciente> &pacientes) {
+void salvarPacientes(const vector<PACIENTE> &pacientes) {
     ofstream arquivo("pacientes.txt");
     if (!arquivo.is_open()) {
         cerr << "Erro ao abrir o arquivo de médicos para escrita." << endl;
@@ -120,9 +118,8 @@ void salvarPacientes(const vector<Paciente> &pacientes) {
     }
 
     for (const auto& paciente : pacientes) {
-        arquivo << paciente.getCodigo() << " "
-                << paciente.getNome() << " "
-                << paciente.getEspecialidade() << endl;
+        arquivo << paciente.getCodigoPaciente() << " "
+                << paciente.getNome() << endl;
     }
 
     arquivo.close();

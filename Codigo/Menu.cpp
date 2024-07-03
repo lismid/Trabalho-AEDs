@@ -649,8 +649,7 @@ void menuCadastro()
     }
 }
 
-void menuHorarios()
-{
+void menuHorarios() {
     Relatorio relatorio; // Instancia um objeto da classe Relatorio para usar seus métodos
 
     int escolha3;
@@ -702,14 +701,4 @@ void menuHorarios()
             break;
         }
     }
-}
-
-// Função extra:
-
-int EscolherUnidade(){
-    int unidade;
-    cout << "Unidades da clinica:" << endl << "1. Unidade Floresta" << "2. Unidade Savassi" << endl << "3. Unidade Santa Tereza" << endl;
-    cout << "Entre com o numero da unidade: " << endl;
-    cin >> unidade;
-    return unidade;
 }
